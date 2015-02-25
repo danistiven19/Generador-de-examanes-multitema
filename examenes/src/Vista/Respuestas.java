@@ -229,7 +229,8 @@ public class Respuestas extends javax.swing.JFrame {
     }//GEN-LAST:event_btnAgregarActionPerformed
 Tema temaMaestro;
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-         cbPregunta.removeAllItems();
+
+        cbPregunta.removeAllItems();
         temaMaestro = ctrlTema.cargarTema(0);
         Iterator it = temaMaestro.getPreguntas().iterator();
         while(it.hasNext()){

@@ -44,10 +44,10 @@ public class latex {
     private String codFinal;
     private archivos adminArch = new archivos();
     private preguntaDAO pDAO = new preguntaDAO();
-
+rutaDAO url = new rutaDAO();
     public int crearEnunciado(Enunciado en) throws IOException, InterruptedException {
         //Para crear un enunciado, primero obtiene la ruta donde se está almacenando la información LaTeX
-        rutaDAO url = new rutaDAO();
+        
         //Creamos la carpeta que contendrá toda la información del enunciado a  crear
 
         String nombre = "Enunciado" + en.getCodigo();
@@ -217,8 +217,9 @@ public class latex {
         preguntaDAO pdao = new preguntaDAO();
         pdao.cargarInformacionPregunta(pAux);
         String ruta = pAux.getUrl() + "\\" + nombre;
+        System.out.println(ruta);
         Process p1 = Runtime.getRuntime().exec("cmd /c " + "md " + ruta + "\\" + nombre);
-        op.setUrl(url.getRutaSQL() + "\\\\" + nombre);
+        op.setUrl(url.getRutaSQL() + "\\\\Enunciado"+pAux.getEnunciado().getCodigo()+"\\\\Pregunta"+pAux.getCodigo()+"\\\\" + nombre);
 
         Thread.sleep(500);
 
@@ -263,7 +264,7 @@ public class latex {
     }
 
     public void nuevoTema(Tema tema, String año, String sem) throws IOException {
-        String rutaCom = "C:\\Users\\Daniel\\Desktop\\Pruebas\\examen" + tema.getCodigo();
+        String rutaCom = url.getRaiz()+"\\Desktop\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
             Process q = Runtime.getRuntime().exec("cmd /c start " + rutaCom + "\\examen.pdf");
@@ -356,7 +357,7 @@ public class latex {
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{C:/Users/Daniel/Desktop/latex/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{"+url.getRutaBase()+"/Desktop/examenes/escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"
@@ -385,7 +386,7 @@ public class latex {
     }
 
     public void nuevoExamen(Tema tema, String año, String sem) throws IOException {
-        String rutaCom = "C:\\Users\\Daniel\\Desktop\\Pruebas\\examen" + tema.getCodigo();
+        String rutaCom = url.getRaiz()+"\\Desktop\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
             /*  PrintWriter a = null;
@@ -500,7 +501,7 @@ public class latex {
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{C:/Users/Daniel/Desktop/examenes/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{"+url.getRutaBase()+"/Desktop/examenes/escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"
@@ -611,7 +612,7 @@ public class latex {
         endao.cargarEnunciado(enAux);
         String ruta = enAux.getUrl() + "\\" + nombre;
         Process p1 = Runtime.getRuntime().exec("cmd /c " + "md " + ruta + "\\" + nombre);
-        p.setUrl(url.getRutaSQL() + "\\\\" + nombre);
+        p.setUrl(url.getRutaSQL()+ "\\\\Enunciado"+p.getEnunciado().getCodigo()+"\\\\" + nombre);
         Thread.sleep(500);
 
         //  Creamos el archivo que contendrá el enunciado e insertamos los paquetes requeridos

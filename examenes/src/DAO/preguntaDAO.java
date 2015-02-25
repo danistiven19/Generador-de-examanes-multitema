@@ -168,6 +168,7 @@ public class preguntaDAO {
             if (p.getDespuesDePregunta().getCodigo() != 0) {
                 ob = p.getDespuesDePregunta().getCodigo();
             }
+            System.out.println(p.getUrl());
             String des = p.getDescripcionPregunta().replace("\\", "\\\\");
                 consulta = "INSERT INTO pregunta VALUES('" + p.getCodigo() + "','" + p.getUrl() + "','" + p.getEnunciado().getCodigo() + "','" + p.getOrden() + "','" + p.getObligatorioa() + "'," + ob + ",'" + p.getTipo() + "','" + des + "')";
             

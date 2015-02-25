@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package DAO;
 
 /**
@@ -11,8 +10,35 @@ package DAO;
  * @author Daniel
  */
 public class rutaDAO {
-    private String ruta = "C:\\Users\\Daniel\\Desktop\\Pruebas";
-    private String rutaSQL = "C:\\\\Users\\\\Daniel\\\\Desktop\\\\Pruebas";
+    private String rutaBase = "C:/Users/Daniel";
+
+    public String getRutaBase() {
+        return rutaBase;
+    }
+
+    public void setRutaBase(String rutaBase) {
+        this.rutaBase = rutaBase;
+    }
+    private String raiz = "C:\\Users\\Daniel";
+    private String raizSQL = "C:\\\\Users\\\\Daniel";
+    private String ruta = raiz + "\\Desktop\\Pruebas";
+    private String rutaSQL = raizSQL + "\\\\Desktop\\\\Pruebas";
+
+    public String getRaiz() {
+        return raiz;
+    }
+
+    public void setRaiz(String raiz) {
+        this.raiz = raiz;
+    }
+
+    public String getRaizSQL() {
+        return raizSQL;
+    }
+
+    public void setRaizSQL(String raizSQL) {
+        this.raizSQL = raizSQL;
+    }
 
     /**
      * @return the ruta
@@ -41,5 +67,5 @@ public class rutaDAO {
     public void setRutaSQL(String rutaSQL) {
         this.rutaSQL = rutaSQL;
     }
-    
+
 }
