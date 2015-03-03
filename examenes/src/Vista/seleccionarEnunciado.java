@@ -70,7 +70,7 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
         cb_Enunciados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
 
         btn_Cancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.setText("Volver");
         btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CancelarActionPerformed(evt);

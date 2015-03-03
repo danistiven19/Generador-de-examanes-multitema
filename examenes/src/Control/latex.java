@@ -52,7 +52,7 @@ rutaDAO url = new rutaDAO();
 
         String nombre = "Enunciado" + en.getCodigo();
         String ruta = url.getRuta() + "\\" + nombre;
-        Process p = Runtime.getRuntime().exec("cmd /c " + "md " + ruta + "\\" + nombre);
+        Process p = Runtime.getRuntime().exec("cmd /C mkdir " + ruta );
         en.setUrl(url.getRutaSQL() + "\\\\" + nombre);
 
         Thread.sleep(500);
@@ -92,6 +92,7 @@ rutaDAO url = new rutaDAO();
         //Creamos el archivo .Tex con el codigo creado anteriormente en la ruta especificada
         String nom = "Enunciado";
         String ext = ".tex";
+        System.out.println(ruta);
         File archivo = new File(ruta, nom + ext);
         PrintWriter a = null;
         try {
@@ -218,9 +219,9 @@ rutaDAO url = new rutaDAO();
         pdao.cargarInformacionPregunta(pAux);
         String ruta = pAux.getUrl() + "\\" + nombre;
         System.out.println(ruta);
-        Process p1 = Runtime.getRuntime().exec("cmd /c " + "md " + ruta + "\\" + nombre);
+        Process p1 = Runtime.getRuntime().exec("cmd /c " + "md " + ruta );
         op.setUrl(url.getRutaSQL() + "\\\\Enunciado"+pAux.getEnunciado().getCodigo()+"\\\\Pregunta"+pAux.getCodigo()+"\\\\" + nombre);
-
+        System.out.println(op.getUrl());
         Thread.sleep(500);
 
         /*Creamos el archivo que contendrá el enunciado e insertamos los paquetes requeridos
@@ -611,7 +612,7 @@ rutaDAO url = new rutaDAO();
         enunciadoDAO endao = new enunciadoDAO();
         endao.cargarEnunciado(enAux);
         String ruta = enAux.getUrl() + "\\" + nombre;
-        Process p1 = Runtime.getRuntime().exec("cmd /c " + "md " + ruta + "\\" + nombre);
+        Process p1 = Runtime.getRuntime().exec("cmd /c md " + ruta);
         p.setUrl(url.getRutaSQL()+ "\\\\Enunciado"+p.getEnunciado().getCodigo()+"\\\\" + nombre);
         Thread.sleep(500);
 

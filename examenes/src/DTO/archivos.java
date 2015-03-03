@@ -96,7 +96,9 @@ public class archivos {
                       }
                   }
                   if (!band){
-                      Process q1 = Runtime.getRuntime().exec("cmd /c start "+ruta+"\\"+nom+".pdf \n exit");
+                      if(!nom.equals("Opcion")){
+                        Process q1 = Runtime.getRuntime().exec("cmd /c start "+ruta+"\\"+nom+".pdf \n exit");
+                      }
                       //Todo se ejecutó perfectamente, entonces realizamos el registro en la base de datos
                       return 1;
                   }else{

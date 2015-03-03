@@ -3,7 +3,6 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 package Vista;
 
 import Control.CtrlEnunciado;
@@ -35,86 +34,83 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     private int existePrimero;
     private int existeUltimo;
     private CtrlPregunta ctrlPreg = new CtrlPregunta();
-   private DTO.Opcion op;
+    private DTO.Opcion op;
     private DTO.Pregunta p;
     ArrayList opciones;
     Collection<Pregunta> pregunta;
     String descripcion;
     int seleccion;
     private CtrlEnunciado ctrlEn = new CtrlEnunciado();
-    private CtrlOpcion ctrlop = new CtrlOpcion(); 
+    private CtrlOpcion ctrlop = new CtrlOpcion();
+
     public AdministrarPregunta(DTO.Pregunta p, int sel) {
         initComponents();
-       // archivos arch = new archivos();
-        this.p=p;
-       this.seleccion= sel;
-        
-/*         File ar = new File(p.getUrl(),"descripcion"+p.getCodigo()+".txt");
+        // archivos arch = new archivos();
+        this.p = p;
+        this.seleccion = sel;
+
+        /*         File ar = new File(p.getUrl(),"descripcion"+p.getCodigo()+".txt");
          try {
-            descripcion = arch.leerTxt(ar);
-        } catch (IOException ex) {
-            Logger.getLogger(AdministrarPregunta.class.getName()).log(Level.SEVERE, null, ex);
-        }
+         descripcion = arch.leerTxt(ar);
+         } catch (IOException ex) {
+         Logger.getLogger(AdministrarPregunta.class.getName()).log(Level.SEVERE, null, ex);
+         }
          txt_DescripcionPregunta.setText(descripcion);*/
-        
-      // DAO.preguntaDAO p1 =new  DAO.preguntaDAO();
+        // DAO.preguntaDAO p1 =new  DAO.preguntaDAO();
         pregunta = new ArrayList<Pregunta>();
         Iterator j;
 //        pregunta= p1.listarCodigosPreguntasdeEnunciado(p.getEnunciado());
-           pregunta=ctrlPreg.listarcodigos(p.getEnunciado().getCodigo());
-            DefaultComboBoxModel ls1 = (DefaultComboBoxModel) cb_ListaPreguntas.getModel();
-        
-         j = pregunta.iterator();
-        while(j.hasNext()){
-            String cod1= j.next().toString();
-            if(p.getCodigo()!= Integer.parseInt(cod1)){
+        pregunta = ctrlPreg.listarcodigos(p.getEnunciado().getCodigo());
+        DefaultComboBoxModel ls1 = (DefaultComboBoxModel) cb_ListaPreguntas.getModel();
+        ls1.addElement("Ninguno");
+        j = pregunta.iterator();
+        while (j.hasNext()) {
+            String cod1 = j.next().toString();
+            if (p.getCodigo() != Integer.parseInt(cod1)) {
                 ls1.addElement(cod1);
             }
         }
-        ls1.addElement("Ninguno");
+
         cb_ListaPreguntas.setModel(ls1);
-               opciones = new ArrayList();
+        opciones = new ArrayList();
         ctrlPreg.listarOpcionesDePRegunta(p);
-         if(opciones.size() == 0) {
+        if (opciones.size() == 0) {
             btn_editarOpcion.setEnabled(false);
             btn_vaciarOpcion.setEnabled(false);
-        }else{
-                          btn_editarOpcion.setEnabled(true);
+        } else {
+            btn_editarOpcion.setEnabled(true);
             btn_vaciarOpcion.setEnabled(true);
-         }
-        if (sel == 1){
-            
-         cb_OrdenPreguntas.setSelectedIndex(p.getOrden()-1);
-           cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta().getCodigo() -1);
-         //cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta() -1);
-         lbl_NumeroPregunta.setText(Integer.toString(p.getCodigo()));
-         cb_EsObligatoria.setSelectedItem(p.getObligatorioa());
-         cb_TipoPreg.setSelectedItem(p.getTipo());
-         txt_DescripcionPregunta.setText(p.getDescripcionPregunta());
-         
+        }
+        if (sel == 1) {
+
+            cb_OrdenPreguntas.setSelectedIndex(p.getOrden() - 1);
+            cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta().getCodigo() - 1);
+            //cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta() -1);
+            lbl_NumeroPregunta.setText(Integer.toString(p.getCodigo()));
+            cb_EsObligatoria.setSelectedItem(p.getObligatorioa());
+            cb_TipoPreg.setSelectedItem(p.getTipo());
+            txt_DescripcionPregunta.setText(p.getDescripcionPregunta());
+
          //Cargar Opciones
-        //this.op=op;
-       // DAO.opcionesDAO op1 =new  DAO.opcionesDAO();
- 
-        opciones = (ArrayList<Opcion>) ctrlPreg.listarOpcionesDePRegunta(p);
-       // opciones= (ArrayList<Opcion>) op1.listarCodigosOpcionesdePregunta(p.getCodigo()); 
-        DefaultComboBoxModel ls2 = (DefaultComboBoxModel) cb_ListaOpciones.getModel();
-       
+            //this.op=op;
+            // DAO.opcionesDAO op1 =new  DAO.opcionesDAO();
+            opciones = (ArrayList<Opcion>) ctrlPreg.listarOpcionesDePRegunta(p);
+            // opciones= (ArrayList<Opcion>) op1.listarCodigosOpcionesdePregunta(p.getCodigo()); 
+            DefaultComboBoxModel ls2 = (DefaultComboBoxModel) cb_ListaOpciones.getModel();
+
             j = opciones.iterator();
-            while(j.hasNext()){
-                Opcion op1 = (Opcion) j.next(); 
-                int cod1= op1.getCodigo();
-                    ls2.addElement(cod1);
+            while (j.hasNext()) {
+                Opcion op1 = (Opcion) j.next();
+                int cod1 = op1.getCodigo();
+                ls2.addElement(cod1);
 
             }
             cb_ListaOpciones.setModel(ls2);
 
-        
-    }else{
+        } else {
             this.p.setCodigo(ctrlEn.obtenerUltimoCodigoOpcionPregunta(p));
         }
     }
-
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -316,7 +312,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         );
 
         btn_cancelarPreguntas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_cancelarPreguntas.setText("Cancelar");
+        btn_cancelarPreguntas.setText("Volver");
         btn_cancelarPreguntas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarPreguntasActionPerformed(evt);
@@ -391,13 +387,13 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
         p.setObligatorioa((String) cb_EsObligatoria.getSelectedItem());
 
-        Pregunta pregaux=new Pregunta();
+        Pregunta pregaux = new Pregunta();
         if (cb_ListaPreguntas.getSelectedItem().equals("Ninguno")) {
             pregaux.setCodigo(0);
-           
+
         } else {
-              pregaux.setCodigo(cb_ListaPreguntas.getSelectedIndex() + 1);
-           
+            pregaux.setCodigo(cb_ListaPreguntas.getSelectedIndex() + 1);
+
         }
         p.setDespuesDePregunta(pregaux);
         p.setOrden(cb_OrdenPreguntas.getSelectedIndex() + 1);
@@ -426,46 +422,46 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_GuardarPreguntasActionPerformed
 
     private void btn_guardarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarOpcionActionPerformed
-       if(p.getOpciones() != null){
-        if( p.getOpciones().size() == 4){
+        if (p.getOpciones() != null) {
+            if (p.getOpciones().size() == 4) {
                 JOptionPane.showMessageDialog(null, "Una pregunta solo puede tener cuatro opciones!");
                 return;
-       }
-       }
-            Examenes ex = new Examenes();
-            op = new Opcion();
-            Pregunta preg=new Pregunta();
-            preg.setCodigo(p.getCodigo());
-            op.setPregunta(preg);
-            ex.abrirOpcion(op, 2);
-            this.hide();
-       
-       
+            }
+        }
+        Examenes ex = new Examenes();
+        op = new Opcion();
+        Pregunta preg = new Pregunta();
+        preg.setCodigo(p.getCodigo());
+        op.setPregunta(preg);
+        ex.abrirOpcion(op, 2);
+        this.hide();
+
+
     }//GEN-LAST:event_btn_guardarOpcionActionPerformed
 
     private void btn_cancelarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarPreguntasActionPerformed
-        try {            
-           Enunciado enu=new Enunciado();
-           enu.setCodigo(p.getEnunciado().getCodigo());
-           ctrlEn.cargarEnunciado(enu);
-           Examenes ex=new Examenes();
-           ex.abrirEnunciado(enu, 1);
-           this.hide();
-       } catch (ParseException ex1) {
-           Logger.getLogger(AdministrarPregunta.class.getName()).log(Level.SEVERE, null, ex1);
-       }
+        try {
+            Enunciado enu = new Enunciado();
+            enu.setCodigo(p.getEnunciado().getCodigo());
+            ctrlEn.cargarEnunciado(enu);
+            Examenes ex = new Examenes();
+            ex.abrirEnunciado(enu, 1);
+            this.hide();
+        } catch (ParseException ex1) {
+            Logger.getLogger(AdministrarPregunta.class.getName()).log(Level.SEVERE, null, ex1);
+        }
 
     }//GEN-LAST:event_btn_cancelarPreguntasActionPerformed
 
     private void cb_OrdenPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_OrdenPreguntasActionPerformed
-       if (this.existePrimero == 1 && cb_OrdenPreguntas.getSelectedIndex() == 0) {//cero es orden primero, 1 orden ultimo, 2 ningun orden
-        	JOptionPane.showMessageDialog(null, "No pueden existir dos enunciados con orden primero!");
-        	return;
-    	}
-    	if (this.existePrimero == 1 && cb_OrdenPreguntas.getSelectedIndex() == 1) {//cero es orden primero, 1 orden ultimo, 2 ningun orden
-        	JOptionPane.showMessageDialog(null, "No pueden existir dos enunciados con orden ultimo!");
-        	return;
-    	}
+        if (this.existePrimero == 1 && cb_OrdenPreguntas.getSelectedIndex() == 0) {//cero es orden primero, 1 orden ultimo, 2 ningun orden
+            JOptionPane.showMessageDialog(null, "No pueden existir dos enunciados con orden primero!");
+            return;
+        }
+        if (this.existePrimero == 1 && cb_OrdenPreguntas.getSelectedIndex() == 1) {//cero es orden primero, 1 orden ultimo, 2 ningun orden
+            JOptionPane.showMessageDialog(null, "No pueden existir dos enunciados con orden ultimo!");
+            return;
+        }
 
     }//GEN-LAST:event_cb_OrdenPreguntasActionPerformed
 
@@ -499,7 +495,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
             public void run() {
-                new AdministrarPregunta(null,0).setVisible(true);
+                new AdministrarPregunta(null, 0).setVisible(true);
             }
         });
     }

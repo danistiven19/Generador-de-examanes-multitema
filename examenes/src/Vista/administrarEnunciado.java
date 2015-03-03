@@ -62,6 +62,7 @@ public class administrarEnunciado extends javax.swing.JFrame {
         codigos = (ArrayList) ctrlEn.listarCodigos();
         DefaultComboBoxModel ls1 = (DefaultComboBoxModel) cb_ListaEnunciados.getModel();
         DefaultComboBoxModel ls2 = (DefaultComboBoxModel) cbAutor.getModel();
+        ls1.addElement("Ninguno");
         Iterator i = codigos.iterator();
         while (i.hasNext()) {
             String cod = i.next().toString();
@@ -69,7 +70,6 @@ public class administrarEnunciado extends javax.swing.JFrame {
                 ls1.addElement(cod);
             }
         }
-        ls1.addElement("Ninguno");
         cb_ListaEnunciados.setModel(ls1);
         areas = (ArrayList<Area>) ctrlEn.listarAreas();
         ls1 = (DefaultComboBoxModel) cb_ListaAreas.getModel();
@@ -223,7 +223,7 @@ actualizarPreg();
         jLabel4.setText("Despues de:");
 
         cb_OrdenEnunciados.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_OrdenEnunciados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Ultimo", "Ninguno" }));
+        cb_OrdenEnunciados.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Primero", "Ultimo" }));
         cb_OrdenEnunciados.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cb_OrdenEnunciadosActionPerformed(evt);
@@ -375,7 +375,7 @@ actualizarPreg();
         );
 
         btn_cancelarEnunciado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_cancelarEnunciado.setText("Cancelar");
+        btn_cancelarEnunciado.setText("Volver");
         btn_cancelarEnunciado.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarEnunciadoActionPerformed(evt);

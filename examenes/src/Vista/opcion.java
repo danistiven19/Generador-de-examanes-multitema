@@ -101,6 +101,7 @@ public class opcion extends javax.swing.JFrame {
         opcion = (ArrayList) ctrlPreg.listarOpcionesDePRegunta(p.getPregunta());
        
         DefaultComboBoxModel ls1 = (DefaultComboBoxModel) cb_DespuesDeOpcion.getModel();
+         ls1.addElement("Ninguno");
         Iterator j = opcion.iterator();
         while (j.hasNext()) {
             Opcion op = (Opcion) j.next();
@@ -108,7 +109,7 @@ public class opcion extends javax.swing.JFrame {
                 ls1.addElement(op.getCodigo());
             }
         }
-        ls1.addElement("Ninguno");
+       
         cb_DespuesDeOpcion.setModel(ls1);
         if (sel == 1) {
             txt_DescripcionOpcion.setText(p.getDescripcionOpcion());
@@ -157,10 +158,15 @@ public class opcion extends javax.swing.JFrame {
         jLabel2.setText("Orden");
 
         cb_OrdenOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_OrdenOpcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Primero", "Ultimo", "Ninguno" }));
+        cb_OrdenOpcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Ninguno", "Primero", "Ultimo" }));
+        cb_OrdenOpcion.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_OrdenOpcionActionPerformed(evt);
+            }
+        });
 
         btn_cancelarOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_cancelarOpcion.setText("Cancelar");
+        btn_cancelarOpcion.setText("Volver");
         btn_cancelarOpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_cancelarOpcionActionPerformed(evt);
@@ -259,11 +265,11 @@ public class opcion extends javax.swing.JFrame {
         p.setOrden(cb_OrdenOpcion.getSelectedIndex() + 1);
         latex lt = new latex();
         try {
-            if (lt.crearOpcion(p) == 1) {
+            if (ctrlop.crearOpcion(p) == 1) {
                 Examenes exa = new Examenes();
                 if (seleccion == 2) {
                     //Duplicar ls backSlashh!
-                    if ( ctrlop.crearOpcion(p) == 1) {
+                    if ( lt.crearOpcion(p) == 1) {
                         JOptionPane.showMessageDialog(this, "Opcion almacenada correctamente!");
                         exa.abrirPregunta(p.getPregunta(), 1);
                         this.hide();
@@ -283,6 +289,10 @@ public class opcion extends javax.swing.JFrame {
         }        // TODO add your handling code here:
 
     }//GEN-LAST:event_btn_GuardarOpcionActionPerformed
+
+    private void cb_OrdenOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_OrdenOpcionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_OrdenOpcionActionPerformed
 
     /**
      * @param args the command line arguments

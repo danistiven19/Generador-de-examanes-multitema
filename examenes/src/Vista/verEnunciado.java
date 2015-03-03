@@ -72,7 +72,7 @@ public class verEnunciado extends javax.swing.JFrame {
         jScrollPane2.setViewportView(txt_enunciado);
 
         btn_Cancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_Cancelar.setText("Cancelar");
+        btn_Cancelar.setText("Volver");
         btn_Cancelar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_CancelarActionPerformed(evt);
