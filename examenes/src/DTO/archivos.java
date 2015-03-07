@@ -50,7 +50,11 @@ public class archivos {
             Logger.getLogger(latex.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
-        String comando ="cd "+ruta+" \n pdflatex "+nombre+"\n exit";
+        String comando ="C: \n cd "+ruta+" \n  ";
+        a.print(comando);
+        comando = "pdflatex "+nombre+"\n";
+        a.print(comando);
+        comando = "exit";
         a.print(comando);
         a.close();
         return 1;
