@@ -133,6 +133,7 @@ public class CredencialTemaDAO {
                 HashMap hm = new HashMap();
                 while(j<credenciales.size()){
                     Tema aux = (Tema)temas.get(k);
+                    
                    asignarCredencial(aux, (Integer)Integer.parseInt(credenciales.get(j).toString()));
                    hm.put(credenciales.get(j), aux.getCodigo()); 
                    if(k==temas.size()){//Hay mas credenciales que temas, por lo tanto se siguen asignando los temas pero nuevamente desde el inicio de temas

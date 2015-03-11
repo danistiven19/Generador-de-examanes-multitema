@@ -20,6 +20,7 @@ import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.DefaultComboBoxModel;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 
 /**
@@ -87,8 +88,8 @@ public class AdministrarPregunta extends javax.swing.JFrame {
             cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta().getCodigo() - 1);
             //cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta() -1);
             lbl_NumeroPregunta.setText(Integer.toString(p.getCodigo()));
-            cb_EsObligatoria.setSelectedItem(p.getObligatorioa());
-            cb_TipoPreg.setSelectedItem(p.getTipo());
+//            cb_EsObligatoria.setSelectedItem(p.getObligatorioa());
+//            cb_TipoPreg.setSelectedItem(p.getTipo());
             txt_DescripcionPregunta.setText(p.getDescripcionPregunta());
 
          //Cargar Opciones
@@ -129,12 +130,9 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         cb_OrdenPreguntas = new javax.swing.JComboBox();
         jLabel7 = new javax.swing.JLabel();
         jLabel8 = new javax.swing.JLabel();
-        cb_EsObligatoria = new javax.swing.JComboBox();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        cb_TipoPreg = new javax.swing.JComboBox();
         jScrollPane1 = new javax.swing.JScrollPane();
         txt_DescripcionPregunta = new javax.swing.JTextArea();
+        btn_SeleccionarImagen = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
         btn_editarOpcion = new javax.swing.JButton();
         cb_ListaOpciones = new javax.swing.JComboBox();
@@ -172,21 +170,17 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         jLabel8.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel8.setText("Descripción:");
 
-        cb_EsObligatoria.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_EsObligatoria.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Si", "No" }));
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel9.setText("Obligatoria:");
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel10.setText("Tipo:");
-
-        cb_TipoPreg.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cb_TipoPreg.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Argumentativa", "Propositiva", "Interpretativa" }));
-
         txt_DescripcionPregunta.setColumns(20);
         txt_DescripcionPregunta.setRows(5);
         jScrollPane1.setViewportView(txt_DescripcionPregunta);
+
+        btn_SeleccionarImagen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_SeleccionarImagen.setText("Seleccionar imagen");
+        btn_SeleccionarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SeleccionarImagenActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -196,28 +190,25 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGap(202, 202, 202)
-                        .addComponent(jLabel5)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(lbl_NumeroPregunta)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel8)
-                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 218, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(34, 34, 34)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(cb_OrdenPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel6)
-                            .addComponent(jLabel9)
-                            .addComponent(cb_EsObligatoria, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 102, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 301, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_SeleccionarImagen)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 31, Short.MAX_VALUE)
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(cb_ListaPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(jLabel7)
-                            .addComponent(jLabel10)
-                            .addComponent(cb_TipoPreg, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(36, 36, 36))))
+                            .addComponent(cb_OrdenPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6))
+                        .addGap(36, 36, 36))
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(jPanel3Layout.createSequentialGroup()
+                                .addGap(202, 202, 202)
+                                .addComponent(jLabel5)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(lbl_NumeroPregunta))
+                            .addComponent(jLabel8))
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -233,24 +224,17 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(jLabel7))
+                            .addComponent(jLabel7)
+                            .addComponent(btn_SeleccionarImagen))
                         .addGap(18, 18, 18)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cb_OrdenPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_ListaPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 17, Short.MAX_VALUE)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(jLabel9)
-                            .addComponent(jLabel10))
+                        .addComponent(cb_ListaPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                            .addComponent(cb_EsObligatoria, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(cb_TipoPreg, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGap(7, 7, 7))
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addComponent(jScrollPane1)
-                        .addContainerGap())))
+                        .addComponent(jLabel6)
+                        .addGap(18, 18, 18)
+                        .addComponent(cb_OrdenPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jScrollPane1))
+                .addContainerGap())
         );
 
         jPanel4.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Opciones", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
@@ -383,9 +367,9 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
     private void btn_GuardarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarPreguntasActionPerformed
         p.setDescripcionPregunta(txt_DescripcionPregunta.getText());
-        p.setTipo(cb_TipoPreg.getSelectedIndex() + 1);
-
-        p.setObligatorioa((String) cb_EsObligatoria.getSelectedItem());
+//        p.setTipo(cb_TipoPreg.getSelectedIndex() + 1);
+//
+//        p.setObligatorioa((String) cb_EsObligatoria.getSelectedItem());
 
         Pregunta pregaux = new Pregunta();
         if (cb_ListaPreguntas.getSelectedItem().equals("Ninguno")) {
@@ -465,6 +449,21 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
     }//GEN-LAST:event_cb_OrdenPreguntasActionPerformed
 
+    private void btn_SeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeleccionarImagenActionPerformed
+
+        JFileChooser elegir = new JFileChooser();
+        int opcion = elegir.showOpenDialog(btn_SeleccionarImagen);
+
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            String pathArchivo = elegir.getSelectedFile().getPath(); //Obtiene path del archivo
+            String nombre = elegir.getSelectedFile().getName(); //obtiene nombre del archivo
+             String path=pathArchivo.replace('\\', '/');
+             //txt_DescripcionPregunta.setText("\\includegraphics{"+path +"}"+ txt_DescripcionPregunta.getText());
+             txt_DescripcionPregunta.insert("\\includegraphics{"+path +"}", txt_DescripcionPregunta.getCaretPosition());
+
+        }
+    }//GEN-LAST:event_btn_SeleccionarImagenActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -502,21 +501,18 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_GuardarPreguntas;
+    private javax.swing.JButton btn_SeleccionarImagen;
     private javax.swing.JButton btn_cancelarPreguntas;
     private javax.swing.JButton btn_editarOpcion;
     private javax.swing.JButton btn_guardarOpcion;
     private javax.swing.JButton btn_vaciarOpcion;
-    private javax.swing.JComboBox cb_EsObligatoria;
     private javax.swing.JComboBox cb_ListaOpciones;
     private javax.swing.JComboBox cb_ListaPreguntas;
     private javax.swing.JComboBox cb_OrdenPreguntas;
-    private javax.swing.JComboBox cb_TipoPreg;
-    private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
     private javax.swing.JLabel jLabel7;
     private javax.swing.JLabel jLabel8;
-    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;

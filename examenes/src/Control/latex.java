@@ -502,7 +502,7 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{"+url.getRutaBase()+"/Desktop/examenes/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{"+url.getRutaBase()+"/Desktop/Generador-de-examanes-multitema/examenes/escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"

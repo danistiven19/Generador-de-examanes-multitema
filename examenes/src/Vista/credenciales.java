@@ -1,10 +1,13 @@
 package Vista;
 
+import Control.CtrlCredencial;
+import Control.CtrlRutas;
 import DAO.CredencialTemaDAO;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.Map;
+import javax.swing.JFileChooser;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -26,7 +29,8 @@ public class credenciales extends javax.swing.JFrame {
     public credenciales() {
         initComponents();
     }
-
+    CtrlCredencial ctrlCredencial = new CtrlCredencial();
+    CtrlRutas ctrlRutas = new CtrlRutas();
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -37,30 +41,30 @@ public class credenciales extends javax.swing.JFrame {
     private void initComponents() {
 
         jLabel1 = new javax.swing.JLabel();
-        campo = new javax.swing.JTextField();
+        txtRutaCredenciales = new javax.swing.JTextField();
         jLabel2 = new javax.swing.JLabel();
-        guardarCrdencial = new javax.swing.JButton();
+        btnSeleccionarCredenciales = new javax.swing.JButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         tabla = new javax.swing.JTable();
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
+        btnGuardarCredenciales = new javax.swing.JButton();
+        btnVolverCredenciales = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
         jLabel1.setText("Credenciales");
 
-        campo.addActionListener(new java.awt.event.ActionListener() {
+        txtRutaCredenciales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                campoActionPerformed(evt);
+                txtRutaCredencialesActionPerformed(evt);
             }
         });
 
-        jLabel2.setText("Ingrese credencial:");
+        jLabel2.setText("Ingrese ruta del archivo con las credenciales:");
 
-        guardarCrdencial.setText("Cargar");
-        guardarCrdencial.addActionListener(new java.awt.event.ActionListener() {
+        btnSeleccionarCredenciales.setText("Seleccionar archivo");
+        btnSeleccionarCredenciales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                guardarCrdencialActionPerformed(evt);
+                btnSeleccionarCredencialesActionPerformed(evt);
             }
         });
 
@@ -74,17 +78,17 @@ public class credenciales extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(tabla);
 
-        jButton1.setText("Guardar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        btnGuardarCredenciales.setText("Guardar");
+        btnGuardarCredenciales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                btnGuardarCredencialesActionPerformed(evt);
             }
         });
 
-        jButton2.setText("Volver");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        btnVolverCredenciales.setText("Volver");
+        btnVolverCredenciales.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                btnVolverCredencialesActionPerformed(evt);
             }
         });
 
@@ -93,26 +97,27 @@ public class credenciales extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(btnVolverCredenciales)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardarCredenciales))
                     .addGroup(layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(jButton2)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jButton1))
-                    .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(140, 140, 140)
-                            .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addGroup(layout.createSequentialGroup()
-                            .addGap(21, 21, 21)
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                .addComponent(jLabel2)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(40, 40, 40)
-                                    .addComponent(guardarCrdencial))))
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 315, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 345, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(140, 140, 140)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(21, 21, 21)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel2)
+                            .addGroup(layout.createSequentialGroup()
+                                .addComponent(txtRutaCredenciales, javax.swing.GroupLayout.PREFERRED_SIZE, 215, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(btnSeleccionarCredenciales, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -123,66 +128,70 @@ public class credenciales extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(campo, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(guardarCrdencial))
+                    .addComponent(txtRutaCredenciales, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btnSeleccionarCredenciales))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jButton1)
-                    .addComponent(jButton2))
+                    .addComponent(btnGuardarCredenciales)
+                    .addComponent(btnVolverCredenciales))
                 .addContainerGap())
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void campoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_campoActionPerformed
+    private void txtRutaCredencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtRutaCredencialesActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_campoActionPerformed
+    }//GEN-LAST:event_txtRutaCredencialesActionPerformed
 
-    private void guardarCrdencialActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_guardarCrdencialActionPerformed
-            
-        DefaultTableModel dft = (DefaultTableModel) tabla.getModel();
+    private void btnSeleccionarCredencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnSeleccionarCredencialesActionPerformed
 
-            String credencial = campo.getText();
-            if(campo.getText().isEmpty()){
-                JOptionPane.showMessageDialog(rootPane, "Debe ingresar un credencial");
-                return;
-            }
-            String [] a = {credencial,"se asigna luego de guardar"};
-            dft.addRow(a);
-            tabla.setModel(dft);
-            campo.setText("");
-            campo.requestFocus();
-    }//GEN-LAST:event_guardarCrdencialActionPerformed
+        JFileChooser elegir = new JFileChooser();
+        int opcion = elegir.showOpenDialog(btnSeleccionarCredenciales);
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            String pathArchivo = elegir.getSelectedFile().getPath(); //Obtiene path del archivo
+            String nombre = elegir.getSelectedFile().getName(); //obtiene nombre del archivo
 
-         CredencialTemaDAO ctDAO = new CredencialTemaDAO();
+            System.out.println("El nombre del archivo es: " + nombre);
+            System.out.println("El path del archivo es: " + pathArchivo);// TODO add your handling code here:
+            txtRutaCredenciales.setText(pathArchivo);
+            ctrlRutas.setRutaLeerCredenciales(pathArchivo);
+        }
+    }//GEN-LAST:event_btnSeleccionarCredencialesActionPerformed
+
+    private void btnGuardarCredencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarCredencialesActionPerformed
+
+        
         
         ArrayList credenciales = new ArrayList();
+        credenciales=ctrlCredencial.readExcelFile(ctrlRutas.getRutaLeerCredenciales());
         DefaultTableModel dft = (DefaultTableModel) tabla.getModel();
         int i =0;
         while(i<dft.getRowCount()){
             credenciales.add(dft.getValueAt(i, 0));
             i=i+1;
         }
+        
+       CredencialTemaDAO ctDAO = new CredencialTemaDAO(); 
         while(0<dft.getRowCount()) dft.removeRow(0);
-        HashMap hm = ctDAO.credencialTema(credenciales);
+      //  HashMap hm = ctrlCredencial.guardarCredenciales(credenciales);
+         HashMap hm =ctDAO.credencialTema(credenciales);
         Iterator it = hm.entrySet().iterator();
         while(it.hasNext()){
             Map.Entry map = (Map.Entry) it.next();
             String[] o = {map.getKey().toString(), map.getValue().toString()};
             dft.addRow(o);
         }
-    }//GEN-LAST:event_jButton1ActionPerformed
+    }//GEN-LAST:event_btnGuardarCredencialesActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+    private void btnVolverCredencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverCredencialesActionPerformed
        Examenes exa = new Examenes();
        exa.abrirPrincipal();
        this.hide();
-    }//GEN-LAST:event_jButton2ActionPerformed
+    }//GEN-LAST:event_btnVolverCredencialesActionPerformed
 
     /**
      * @param args the command line arguments
@@ -220,14 +229,14 @@ public class credenciales extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JTextField campo;
-    private javax.swing.JButton guardarCrdencial;
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
+    private javax.swing.JButton btnGuardarCredenciales;
+    private javax.swing.JButton btnSeleccionarCredenciales;
+    private javax.swing.JButton btnVolverCredenciales;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tabla;
+    private javax.swing.JTextField txtRutaCredenciales;
     // End of variables declaration//GEN-END:variables
 
 }

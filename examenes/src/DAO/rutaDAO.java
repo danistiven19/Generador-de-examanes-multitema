@@ -10,7 +10,7 @@ package DAO;
  * @author Daniel
  */
 public class rutaDAO {
-    private String rutaBase = "C:/Users/Daniel";
+    private String rutaBase = "C:/Users/Luisa";
 
     public String getRutaBase() {
         return rutaBase;
@@ -19,10 +19,13 @@ public class rutaDAO {
     public void setRutaBase(String rutaBase) {
         this.rutaBase = rutaBase;
     }
-    private String raiz = "C:\\Users\\Daniel";
-    private String raizSQL = "C:\\\\Users\\\\Daniel";
+    private String raiz = "C:\\Users\\Luisa";
+    private String raizSQL = "C:\\\\Users\\\\Luisa";
     private String ruta = raiz + "\\Desktop\\Pruebas";
     private String rutaSQL = raizSQL + "\\\\Desktop\\\\Pruebas";
+    
+   
+    
 
     public String getRaiz() {
         return raiz;

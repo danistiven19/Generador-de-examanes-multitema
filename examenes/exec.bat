@@ -1,4 +1,4 @@
 C: 
- cd C:\Users\Daniel\Desktop\Pruebas\Enunciado5\Pregunta6\Opcion2 
-  pdflatex Opcion.tex
+ cd C:\Users\Luisa\Desktop\Pruebas\Enunciado3 
+  pdflatex Enunciado.tex
 exit

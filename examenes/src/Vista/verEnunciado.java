@@ -6,6 +6,7 @@ import java.io.File;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JFileChooser;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -24,6 +25,7 @@ public class verEnunciado extends javax.swing.JFrame {
      */
     String paquetes;
     String enunciado;
+    
     private Enunciado en1;
     
     public verEnunciado(DTO.Enunciado en, int seleccion) {
@@ -52,6 +54,7 @@ public class verEnunciado extends javax.swing.JFrame {
         txt_enunciado = new javax.swing.JTextArea();
         btn_Cancelar = new javax.swing.JButton();
         btn_Guardar = new javax.swing.JButton();
+        btn_SeleccionarImagen = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -87,6 +90,14 @@ public class verEnunciado extends javax.swing.JFrame {
             }
         });
 
+        btn_SeleccionarImagen.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_SeleccionarImagen.setText("Seleccionar imagen");
+        btn_SeleccionarImagen.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_SeleccionarImagenActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -94,15 +105,16 @@ public class verEnunciado extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                    .addGroup(layout.createSequentialGroup()
-                        .addComponent(btn_Cancelar)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_Guardar))
                     .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                         .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addComponent(jLabel1)
                         .addComponent(jLabel2)
-                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(layout.createSequentialGroup()
+                        .addComponent(btn_Cancelar)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btn_Guardar))
+                    .addComponent(btn_SeleccionarImagen))
                 .addContainerGap(32, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
@@ -116,11 +128,13 @@ public class verEnunciado extends javax.swing.JFrame {
                 .addComponent(jLabel2)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 102, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_SeleccionarImagen)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 23, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btn_Guardar)
                     .addComponent(btn_Cancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
 
         pack();
@@ -135,6 +149,21 @@ public class verEnunciado extends javax.swing.JFrame {
         en1.setEnunciado(txt_enunciado.getText());
         this.hide();
     }//GEN-LAST:event_btn_GuardarActionPerformed
+
+    private void btn_SeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeleccionarImagenActionPerformed
+        
+        JFileChooser elegir = new JFileChooser();
+        int opcion = elegir.showOpenDialog(btn_SeleccionarImagen);
+
+        if (opcion == JFileChooser.APPROVE_OPTION) {
+            String pathArchivo = elegir.getSelectedFile().getPath(); //Obtiene path del archivo
+            String nombre = elegir.getSelectedFile().getName(); //obtiene nombre del archivo
+            String path=pathArchivo.replace('\\', '/');
+            //txt_enunciado.setText("\\includegraphics{"+path +"}"+ txt_enunciado.getText());
+            txt_enunciado.insert("\\includegraphics{"+path +"}", txt_enunciado.getCaretPosition());
+          
+        }
+    }//GEN-LAST:event_btn_SeleccionarImagenActionPerformed
 
     /**
      * @param args the command line arguments
@@ -174,6 +203,7 @@ public class verEnunciado extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btn_Cancelar;
     private javax.swing.JButton btn_Guardar;
+    private javax.swing.JButton btn_SeleccionarImagen;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JScrollPane jScrollPane1;

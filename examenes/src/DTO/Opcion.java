@@ -11,9 +11,8 @@ public class Opcion{
         private Opcion despuesDeOpcion;
         private Pregunta pregunta;
         private String descripcionOpcion;
-    /**
-     * @return the codigo
-     */
+        
+    
     public int getCodigo() {
         return codigo;
     }

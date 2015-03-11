@@ -22,7 +22,7 @@ public class Pregunta{
         private int tipo;
         private String descripcionPregunta;
         private Collection<Opcion> opciones;
-
+        
     public Collection<Opcion> getOpciones() {
         return opciones;
     }

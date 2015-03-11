@@ -23,6 +23,7 @@ public class Enunciado {
     private String paquetes;
     private String enunciado;
     private Collection<Pregunta> preguntas;
+   
 
     public Collection<Pregunta> getPreguntas() {
         return preguntas;
