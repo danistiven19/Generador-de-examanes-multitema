@@ -10,9 +10,15 @@ package Control;
  *
  * @author Luisa
  */
+
 import DAO.CredencialTemaDAO;
+import DAO.rutaDAO;
+import DTO.Credencial_Tema;
+import DTO.Tema;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -22,14 +28,19 @@ import org.apache.poi.hssf.usermodel.HSSFRow;
 import org.apache.poi.hssf.usermodel.HSSFSheet;
 import org.apache.poi.hssf.usermodel.HSSFWorkbook;
 import org.apache.poi.poifs.filesystem.POIFSFileSystem;
+import org.apache.poi.ss.usermodel.Cell;
+import org.apache.poi.ss.usermodel.Row;
+import org.apache.poi.ss.usermodel.Sheet;
+import org.apache.poi.ss.usermodel.Workbook;
 
 /**
  * @author giftsam
  */
 public class CtrlCredencial {
-    ArrayList credenciales = new ArrayList();
-    CredencialTemaDAO ctDAO = new CredencialTemaDAO();
-    
+    private ArrayList credenciales = new ArrayList();
+    private CredencialTemaDAO ctDAO = new CredencialTemaDAO();
+    rutaDAO ruta=new rutaDAO();
+    String fileNameWrite = ruta.getRuta();
     /**
      * This method is used to read the data's from an excel file.
      *
@@ -52,6 +63,7 @@ public class CtrlCredencial {
 
       //POIFSFileSystem fsFileSystem = new POIFSFileSystem(fileInputStream);
             /*
+            
              * Create a new instance for HSSFWorkBook Class
              */
             HSSFWorkbook workbook = new HSSFWorkbook(fileInputStream);
@@ -109,11 +121,72 @@ public class CtrlCredencial {
         
         return credenciales;
     }
-
-    public static void main(String[] args) {
-        String fileName = "F:\\U\\Generador-de-examanes-multitema-master\\Pruebas\\Inscritos pregrado 2013-2 - copia.xls";
-
-        new CtrlCredencial().readExcelFile(fileName);
+public File writeExcelFile() throws IOException{
+        ArrayList credencialTemaAr=new ArrayList();
+        credencialTemaAr=ctDAO.getCredencialTema();
+        Iterator itcredencialTema=credencialTemaAr.iterator();
+        Credencial_Tema credencialTema=new Credencial_Tema();
+        String credencial="";
+        Tema temaT=new Tema();
+        int tema=0;
+           
+        /*La ruta donde se creará el archivo*/
+        String rutaArchivo = System.getProperty(fileNameWrite)+"/credencialTema.xls";
+        /*Se crea el objeto de tipo File con la ruta del archivo*/
+        File archivoXLS = new File(rutaArchivo);
+        /*Si el archivo existe se elimina*/
+        if(archivoXLS.exists()) archivoXLS.delete();
+        /*Se crea el archivo*/
+        archivoXLS.createNewFile();
+        
+        /*Se crea el libro de excel usando el objeto de tipo Workbook*/
+        Workbook libro = new HSSFWorkbook();
+        /*Se inicializa el flujo de datos con el archivo xls*/
+        FileOutputStream archivo = new FileOutputStream(archivoXLS);
+        
+        /*Utilizamos la clase Sheet para crear una nueva hoja de trabajo dentro del libro que creamos anteriormente*/
+        Sheet hoja = libro.createSheet("Pregrado - 2013-02 CredencilesxTema");
+        int f=0;
+        while(itcredencialTema.hasNext()){
+        credencialTema=(Credencial_Tema) itcredencialTema.next();
+        credencial=credencialTema.getCredencial();
+        temaT=credencialTema.getTema();
+        tema=temaT.getCodigo();
+           
+        /*Hacemos un ciclo para inicializar los valores de 10 filas de celdas*/
+           
+                /*La clase Row nos permitirá crear las filas*/
+        Row fila = hoja.createRow(f);
+        
+         for(int c=0;c<2;c++){
+                /*Creamos la celda a partir de la fila actual*/
+                Cell celda = fila.createCell(c);
+                
+                /*Si la fila es la número 0, estableceremos los encabezados*/
+                if(f==0 && c==0){
+                    celda.setCellValue("Credencial");
+                }else if(f==0 && c==1){
+                    celda.setCellValue("Tema");
+                }else if(f!=0 && c==0){
+                     /*Si no es la primera fila establecemos un valor*/
+                     celda.setCellValue(credencial);
+                }else{
+                    /*Si no es la primera fila establecemos un valor*/
+                    celda.setCellValue(tema);
+                }
+            }
+       
+        f=f+1;
+            
+        }
+        
+        /*Escribimos en el libro*/
+        libro.write(archivo);
+        /*Cerramos el flujo de datos*/
+        archivo.close();
+        /*Y abrimos el archivo con la clase Desktop*/
+        
+        return archivoXLS;
     }
     
     public HashMap guardarCredenciales(ArrayList cred) {
