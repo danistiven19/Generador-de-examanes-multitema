@@ -121,7 +121,7 @@ DROP TABLE IF EXISTS `enunciado`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `enunciado` (
   `codigo` int(11) NOT NULL,
-  `urlEnunciado` varchar(45) NOT NULL,
+  `urlEnunciado` varchar(200) NOT NULL,
   `fechaCreacion` date NOT NULL,
   `orden` int(11) DEFAULT NULL,
   `autor` varchar(15) NOT NULL,
@@ -150,7 +150,7 @@ DROP TABLE IF EXISTS `opcion`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `opcion` (
   `idOpcion` int(11) NOT NULL,
-  `urlOpcion` varchar(45) NOT NULL,
+  `urlOpcion` varchar(200) NOT NULL,
   `orden` int(11) DEFAULT NULL,
   `despuesDeOpcion` int(11) DEFAULT NULL,
   `pregunta` int(11) NOT NULL,
@@ -174,7 +174,7 @@ DROP TABLE IF EXISTS `pregunta`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `pregunta` (
   `idPregunta` int(11) NOT NULL,
-  `urlPregunta` varchar(45) NOT NULL,
+  `urlPregunta` varchar(200) NOT NULL,
   `enunciado` int(11) NOT NULL,
   `orden` int(11) DEFAULT NULL,
   `obligatoria` varchar(45) DEFAULT NULL,

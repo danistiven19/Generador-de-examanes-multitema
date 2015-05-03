@@ -120,7 +120,7 @@ public class CredencialTemaDAO {
     	Connection con = bd.conexion();
 
     	try{
-            int j =0,k=0;
+            int j =1,k=0;
         	String consulta = "SELECT * FROM Tema WHERE codigo > 0";
         	Statement sta = con.createStatement();
         	ResultSet rs = sta.executeQuery(consulta);
@@ -136,12 +136,12 @@ public class CredencialTemaDAO {
                     
                    asignarCredencial(aux, (Integer)Integer.parseInt(credenciales.get(j).toString()));
                    hm.put(credenciales.get(j), aux.getCodigo()); 
-                   if(k==temas.size()){//Hay mas credenciales que temas, por lo tanto se siguen asignando los temas pero nuevamente desde el inicio de temas
-                        k=0;
-                    }
+                
                 j++;
                 k++;  
-
+                    if(k==temas.size()){//Hay mas credenciales que temas, por lo tanto se siguen asignando los temas pero nuevamente desde el inicio de temas
+                        k=0;
+                    }
                 }
              return hm;
     	}catch(Exception e){
