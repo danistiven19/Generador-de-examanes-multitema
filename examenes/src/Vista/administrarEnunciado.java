@@ -156,10 +156,10 @@ actualizarPreg();
             btn_EliminarPregunta.setEnabled(false);
         }else{
             DefaultComboBoxModel ls2 = (DefaultComboBoxModel) cb_ListaPreguntas.getModel();
-            Iterator j = pregunta.iterator();
-            while (j.hasNext()) {
-                String cod1 = j.next().toString();
-                ls2.addElement(cod1);
+            int kk=1;
+            while (kk < pregunta.size()+1) {
+                ls2.addElement(Integer.toString(kk));
+                kk++;
             }
             cb_ListaPreguntas.setModel(ls2);
             btn_editarPregunta.setEnabled(true);
@@ -463,7 +463,7 @@ actualizarPreg();
 
     private void btn_editarPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_editarPreguntaActionPerformed
         p = new DTO.Pregunta();
-        p.setCodigo(Integer.parseInt((String) cb_ListaPreguntas.getSelectedItem().toString()));
+        p.setCodigo((int) pregunta.get(Integer.parseInt(cb_ListaPreguntas.getSelectedItem().toString())-1));
         //DAO.preguntaDAO pDAO = new DAO.preguntaDAO();
         ctrlPreg.cargarInfPreg(p);
         Examenes ex = new Examenes();
