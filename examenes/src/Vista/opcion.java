@@ -269,6 +269,15 @@ public class opcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarOpcionActionPerformed
 
     private void btn_GuardarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarOpcionActionPerformed
+               /**
+        * Cambiamos comillas simples por comillas dobles, esto con el fin de evitar conflictos en SQL
+        */
+        String textoEnunciado = txt_DescripcionOpcion.getText();
+        char comillaSimple = 39;
+        char comillaDoble =34;
+        String nuevoTexto = textoEnunciado.replace(comillaSimple,comillaDoble);
+        txt_DescripcionOpcion.setText(nuevoTexto);
+        
         p.setDescripcionOpcion(txt_DescripcionOpcion.getText());
         Opcion op2= new Opcion();
         if (cb_DespuesDeOpcion.getSelectedItem() == "Ninguno") {

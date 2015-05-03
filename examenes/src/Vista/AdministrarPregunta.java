@@ -450,7 +450,15 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_cb_OrdenPreguntasActionPerformed
 
     private void btn_SeleccionarImagenActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_SeleccionarImagenActionPerformed
-
+       /**
+        * Cambiamos comillas simples por comillas dobles, esto con el fin de evitar conflictos en SQL
+        */
+        String textoEnunciado = txt_DescripcionPregunta.getText();
+        char comillaSimple = 39;
+        char comillaDoble =34;
+        String nuevoTexto = textoEnunciado.replace(comillaSimple,comillaDoble);
+        txt_DescripcionPregunta.setText(nuevoTexto);
+        
         JFileChooser elegir = new JFileChooser();
         int opcion = elegir.showOpenDialog(btn_SeleccionarImagen);
 

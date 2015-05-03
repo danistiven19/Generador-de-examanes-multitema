@@ -72,6 +72,11 @@ public class verEnunciado extends javax.swing.JFrame {
         txt_enunciado.setColumns(20);
         txt_enunciado.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         txt_enunciado.setRows(5);
+        txt_enunciado.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyPressed(java.awt.event.KeyEvent evt) {
+                txt_enunciadoKeyPressed(evt);
+            }
+        });
         jScrollPane2.setViewportView(txt_enunciado);
 
         btn_Cancelar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
@@ -145,6 +150,14 @@ public class verEnunciado extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
+        /**
+        * Cambiamos comillas simples por comillas dobles, esto con el fin de evitar conflictos en SQL
+        */
+        String textoEnunciado = txt_enunciado.getText();
+        char comillaSimple = 39;
+        char comillaDoble =34;
+        String nuevoTexto = textoEnunciado.replace(comillaSimple,comillaDoble);
+        txt_enunciado.setText(nuevoTexto);
         en1.setPaquetes(txt_paquetes.getText());
         en1.setEnunciado(txt_enunciado.getText());
         this.hide();
@@ -164,6 +177,10 @@ public class verEnunciado extends javax.swing.JFrame {
           
         }
     }//GEN-LAST:event_btn_SeleccionarImagenActionPerformed
+
+    private void txt_enunciadoKeyPressed(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_txt_enunciadoKeyPressed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txt_enunciadoKeyPressed
 
     /**
      * @param args the command line arguments
