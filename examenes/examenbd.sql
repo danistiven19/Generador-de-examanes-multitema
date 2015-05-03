@@ -96,7 +96,7 @@ DROP TABLE IF EXISTS `credencial_tema`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `credencial_tema` (
   `tema` int(11) NOT NULL,
-  `credencial` varchar(45) NOT NULL,
+  `credencial` int(11) NOT NULL,
   PRIMARY KEY (`tema`,`credencial`),
   KEY `fk_temas` (`tema`),
   CONSTRAINT `fk_temas` FOREIGN KEY (`tema`) REFERENCES `tema` (`codigo`) ON DELETE NO ACTION ON UPDATE NO ACTION
