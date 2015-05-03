@@ -522,7 +522,7 @@ actualizarPreg();
         if (cb_ListaEnunciados.getSelectedItem().equals("Ninguno")) {
             enaux.setCodigo(0);
         } else {
-            if ((cb_OrdenEnunciados.getSelectedIndex() + 1) == 1 || (cb_OrdenEnunciados.getSelectedIndex() + 1) == 2) {
+            if ((cb_OrdenEnunciados.getSelectedIndex()) != 0) {
                 JOptionPane.showMessageDialog(this, "Verifique sus condiciones, no pueden ingresar dos condicionamientos diferentes");
                 return;
             }

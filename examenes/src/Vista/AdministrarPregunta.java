@@ -92,7 +92,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 //            cb_TipoPreg.setSelectedItem(p.getTipo());
             txt_DescripcionPregunta.setText(p.getDescripcionPregunta());
 
-         //Cargar Opciones
+            //Cargar Opciones
             //this.op=op;
             // DAO.opcionesDAO op1 =new  DAO.opcionesDAO();
             opciones = (ArrayList<Opcion>) ctrlPreg.listarOpcionesDePRegunta(p);
@@ -366,6 +366,8 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_vaciarOpcionActionPerformed
 
     private void btn_GuardarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarPreguntasActionPerformed
+
+   
         p.setDescripcionPregunta(txt_DescripcionPregunta.getText());
 //        p.setTipo(cb_TipoPreg.getSelectedIndex() + 1);
 //
@@ -376,8 +378,11 @@ public class AdministrarPregunta extends javax.swing.JFrame {
             pregaux.setCodigo(0);
 
         } else {
-            pregaux.setCodigo(cb_ListaPreguntas.getSelectedIndex() + 1);
-
+            if (cb_OrdenPreguntas.getSelectedIndex()!= 0) {
+               JOptionPane.showMessageDialog(this, "Verifique sus condiciones, no pueden ingresar dos condicionamientos diferentes");
+                return;
+            }
+                pregaux.setCodigo(cb_ListaPreguntas.getSelectedIndex() + 1);
         }
         p.setDespuesDePregunta(pregaux);
         p.setOrden(cb_OrdenPreguntas.getSelectedIndex() + 1);
@@ -457,9 +462,9 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         if (opcion == JFileChooser.APPROVE_OPTION) {
             String pathArchivo = elegir.getSelectedFile().getPath(); //Obtiene path del archivo
             String nombre = elegir.getSelectedFile().getName(); //obtiene nombre del archivo
-             String path=pathArchivo.replace('\\', '/');
-             //txt_DescripcionPregunta.setText("\\includegraphics{"+path +"}"+ txt_DescripcionPregunta.getText());
-             txt_DescripcionPregunta.insert("\\includegraphics{"+path +"}", txt_DescripcionPregunta.getCaretPosition());
+            String path = pathArchivo.replace('\\', '/');
+            //txt_DescripcionPregunta.setText("\\includegraphics{"+path +"}"+ txt_DescripcionPregunta.getText());
+            txt_DescripcionPregunta.insert("\\includegraphics{" + path + "}", txt_DescripcionPregunta.getCaretPosition());
 
         }
     }//GEN-LAST:event_btn_SeleccionarImagenActionPerformed

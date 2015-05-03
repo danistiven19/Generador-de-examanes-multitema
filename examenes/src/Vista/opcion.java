@@ -38,44 +38,7 @@ public class opcion extends javax.swing.JFrame {
     int seleccion;
     private CtrlPregunta ctrlPreg = new CtrlPregunta();
     private CtrlOpcion ctrlop = new CtrlOpcion();
-    /*public opcion(Control.Opcion p, int sel) {
-     initComponents();
-     archivos arch = new archivos();
-     this.p=p;
-     this.seleccion = sel;
-  	 
-
-     DAO.opcionesDAO p1 =new  DAO.opcionesDAO();
-     opcion = new ArrayList();
-     opcion = p1.listarCodigosOpcionesdePregunta(p.getPregunta());
-     DefaultComboBoxModel ls1 = (DefaultComboBoxModel) cb_DespuesDeOpcion.getModel();
-     Iterator j = opcion.iterator();
-     while(j.hasNext()){
-     String cod1= j.next().toString();
-     if(p.getCodigo()!= Integer.parseInt(cod1)){
-     ls1.addElement(cod1);
-     }
-     }
-     ls1.addElement("Ninguno");
-     cb_DespuesDeOpcion.setModel(ls1);
-     if(sel ==1){
-     txt_DescripcionOpcion.setText(p.getDescripcionOpcion());
-     if(p.getdespuesDeOpcion() != 0){
-     cb_DespuesDeOpcion.setSelectedIndex(p.getdespuesDeOpcion()-1);
-     }else{
-     cb_DespuesDeOpcion.setSelectedItem("Ninguno");
-     }
-            
-     cb_OrdenOpcion.setSelectedIndex(p.getOrden()-1);
-     }else{
-     this.p.setCodigo(p1.obtenerCodigoOpcion(p));
-     }
-     	
-        
-   	 
-   	 
-   	 
-     }*/
+   
     public opcion(DTO.Opcion p, int sel) {
         initComponents();
         archivos arch = new archivos();
@@ -273,10 +236,12 @@ public class opcion extends javax.swing.JFrame {
         Opcion op2= new Opcion();
         if (cb_DespuesDeOpcion.getSelectedItem() == "Ninguno") {
             op2.setCodigo(0);
-            
         } else {
+            if (cb_OrdenOpcion.getSelectedIndex() != 0) {
+               JOptionPane.showMessageDialog(this, "Verifique sus condiciones, no pueden ingresar dos condicionamientos diferentes");
+                return;
+            }
              op2.setCodigo(Integer.parseInt(cb_DespuesDeOpcion.getSelectedItem().toString()));
-           
         }
          p.setdespuesDeOpcion(op2);
         p.setOrden(cb_OrdenOpcion.getSelectedIndex() + 1);
