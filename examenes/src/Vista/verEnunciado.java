@@ -7,6 +7,7 @@ import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JFileChooser;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
@@ -145,6 +146,11 @@ public class verEnunciado extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_CancelarActionPerformed
 
     private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
+        if(txt_enunciado.getText().equals("")){
+            JOptionPane.showMessageDialog(null, "Debe ingresar una descripción");
+            txt_enunciado.requestFocus();
+            return;
+        }
         en1.setPaquetes(txt_paquetes.getText());
         en1.setEnunciado(txt_enunciado.getText());
         this.hide();

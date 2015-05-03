@@ -232,6 +232,11 @@ public class opcion extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_cancelarOpcionActionPerformed
 
     private void btn_GuardarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarOpcionActionPerformed
+        if(txt_DescripcionOpcion.equals("")){
+            JOptionPane.showMessageDialog(null, "Debe ingresar la descripción");
+            txt_DescripcionOpcion.requestFocus();
+            return;
+        }
         p.setDescripcionOpcion(txt_DescripcionOpcion.getText());
         Opcion op2= new Opcion();
         if (cb_DespuesDeOpcion.getSelectedItem() == "Ninguno") {

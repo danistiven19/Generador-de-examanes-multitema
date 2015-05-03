@@ -367,7 +367,11 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
     private void btn_GuardarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarPreguntasActionPerformed
 
-   
+        if(txt_DescripcionPregunta.equals("")){
+            JOptionPane.showMessageDialog(null, "Debe ingresar una descripción");
+            txt_DescripcionPregunta.requestFocus();
+            return;
+        }
         p.setDescripcionPregunta(txt_DescripcionPregunta.getText());
 //        p.setTipo(cb_TipoPreg.getSelectedIndex() + 1);
 //
