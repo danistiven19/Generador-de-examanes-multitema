@@ -41,6 +41,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     Collection<Pregunta> pregunta;
     String descripcion;
     int seleccion;
+    private int maxOpcion;
     private CtrlEnunciado ctrlEn = new CtrlEnunciado();
     private CtrlOpcion ctrlop = new CtrlOpcion();
 
@@ -103,8 +104,12 @@ public class AdministrarPregunta extends javax.swing.JFrame {
             while (j.hasNext()) {
                 Opcion op1 = (Opcion) j.next();
                 int cod1 = op1.getCodigo();
+                if(cod1 > maxOpcion){
+                    maxOpcion= cod1;
+                }
                 ls2.addElement(cod1);
-
+                btn_editarOpcion.setEnabled(true);
+                
             }
             cb_ListaOpciones.setModel(ls2);
 
@@ -347,7 +352,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         op = new DTO.Opcion();
         op.setCodigo(Integer.parseInt((String) cb_ListaOpciones.getSelectedItem().toString()));
         op.setPregunta(p);
-        ctrlop.cargarOpcion(op);
+        op= ctrlop.cargarOpcion(op);
         Examenes exa = new Examenes();
         exa.abrirOpcion(op, 1);
         this.hide();
@@ -423,6 +428,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         }
         Examenes ex = new Examenes();
         op = new Opcion();
+        op.setCodigo(maxOpcion+1);
         Pregunta preg = new Pregunta();
         preg.setCodigo(p.getCodigo());
         op.setPregunta(preg);
