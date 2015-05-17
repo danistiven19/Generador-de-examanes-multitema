@@ -52,7 +52,7 @@ rutaDAO url = new rutaDAO();
 
         String nombre = "Enunciado" + en.getCodigo();
         String ruta = url.getRuta() + "\\" + nombre;
-        Process p = Runtime.getRuntime().exec("cmd /C mkdir " + ruta );
+        Process p = Runtime.getRuntime().exec("cmd /C "+url.getUnidad()+" && cd "+url.getRuta()+" && mkdir " + nombre );
         en.setUrl(url.getRutaSQL() + "\\\\" + nombre);
 
         Thread.sleep(500);
@@ -121,7 +121,7 @@ rutaDAO url = new rutaDAO();
                 }
             }
             if (!band) {
-                Process q1 = Runtime.getRuntime().exec("cmd /c start " + ruta + "\\" + nom + ".pdf \n exit");
+                Process q1 = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+ruta+" && start "+ nom + ".pdf && exit");
                 //Todo se ejecutó perfectamente, entonces realizamos el registro en la base de datos
                 return 1;
 
@@ -219,7 +219,7 @@ rutaDAO url = new rutaDAO();
         pdao.cargarInformacionPregunta(pAux);
         String ruta = pAux.getUrl() + "\\" + nombre;
         System.out.println(ruta);
-        Process p1 = Runtime.getRuntime().exec("cmd /c " + "md " + ruta );
+        Process p1 = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+pAux.getUrl()+" && md " + nombre );
         op.setUrl(url.getRutaSQL() + "\\\\Enunciado"+pAux.getEnunciado().getCodigo()+"\\\\Pregunta"+pAux.getCodigo()+"\\\\" + nombre);
         System.out.println(op.getUrl());
         Thread.sleep(500);
@@ -265,10 +265,10 @@ rutaDAO url = new rutaDAO();
     }
 
     public void nuevoTema(Tema tema, String año, String sem) throws IOException {
-        String rutaCom = url.getRaiz()+"\\Desktop\\Pruebas\\examen" + tema.getCodigo();
+        String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
-            Process q = Runtime.getRuntime().exec("cmd /c start " + rutaCom + "\\examen.pdf");
+            Process q = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+rutaCom+" && start examen.pdf");
             return;
         }
         Enunciado e = new Enunciado();
@@ -358,7 +358,7 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{"+url.getRutaBase()+"/Desktop/examenes/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{../../examenes/escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"
@@ -387,24 +387,12 @@ rutaDAO url = new rutaDAO();
     }
 
     public void nuevoExamen(Tema tema, String año, String sem) throws IOException {
-        String rutaCom = url.getRaiz()+"\\Desktop\\Pruebas\\examen" + tema.getCodigo();
+        String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
-            /*  PrintWriter a = null;
-             File bat = new File("exec.bat");
-             a = null;
-             try {
-             a = new PrintWriter(bat);
-
-             } catch (FileNotFoundException ex) {
-             Logger.getLogger(latex.class.getName()).log(Level.SEVERE, null, ex);
-             }
-
-             String comando = "cd " + rutaCom + "\\\\\" \n pdflatex examen.tex \n start " + rutaCom + "\\examen.pdf \n exit";
-             a.print(comando);
-             a.close();*/
-            Process q = Runtime.getRuntime().exec("cmd /c start " + rutaCom + "\\examen.pdf");
-            return;
+           // Process q = Runtime.getRuntime().exec("cmd /c cd "+rutaCom+" && start examen.pdf");
+              Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + rutaCom + " \n exit");
+            //return;
         }
    //a tema meterle fecha (sacarladelsistema) y  
         //crear instancia de temaDAO y ustiliza emtodo crearTema y envio el tema que acabod e crear
@@ -502,7 +490,7 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{"+url.getRutaBase()+"/Desktop/Generador-de-examanes-multitema/examenes/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{../../examenes/escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"
@@ -535,7 +523,7 @@ rutaDAO url = new rutaDAO();
         String ext = ".tex";
         rutaDAO ruta = new rutaDAO();
         try {
-            Process p = Runtime.getRuntime().exec("cmd /c " + "md " + ruta.getRuta() + "\\examen" + tema.getCodigo());
+            Process p = Runtime.getRuntime().exec("cmd /c  "+url.getUnidad()+" && cd "+ruta.getRuta()+" &&  md examen" + tema.getCodigo());
             //Process p = Runtime.getRuntime().exec("cmd /c "+"md "+ruta+"\\"+nombre);
             Thread.sleep(500);
             File archivo = new File(ruta.getRuta() + "\\examen" + tema.getCodigo() + "\\" + nombre + ext);
@@ -560,12 +548,12 @@ rutaDAO url = new rutaDAO();
             } catch (FileNotFoundException ex) {
                 Logger.getLogger(latex.class.getName()).log(Level.SEVERE, null, ex);
             }
-            String comando = "cd " + ruta.getRuta() + "\\examen" + tema.getCodigo() + "\\\\\" \n pdflatex " + nombre + ext + " \n start " + ruta.getRuta() + "\\examen" + tema.getCodigo() + "\\" + nombre + ".pdf \n exit";
+            String comando = url.getUnidad()+" \n cd " + ruta.getRuta() + "\\examen" + tema.getCodigo() + "\n pdflatex " + nombre + ext + " \n start "+ nombre + ".pdf \n exit";
             a.print(comando);
             a.close();
 
             try {
-                Process q = Runtime.getRuntime().exec("cmd /c start " + "exec.bat");
+                Process q = Runtime.getRuntime().exec("cmd /c start exec.bat");
                 //   temaDAO td=new temaDAO();
                 //   td.ingresarTema(tema);
 
@@ -612,7 +600,7 @@ rutaDAO url = new rutaDAO();
         enunciadoDAO endao = new enunciadoDAO();
         endao.cargarEnunciado(enAux);
         String ruta = enAux.getUrl() + "\\" + nombre;
-        Process p1 = Runtime.getRuntime().exec("cmd /c md " + ruta);
+        Process p1 = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+enAux.getUrl()+" && md " + nombre);
         p.setUrl(url.getRutaSQL()+ "\\\\Enunciado"+p.getEnunciado().getCodigo()+"\\\\" + nombre);
         Thread.sleep(500);
 

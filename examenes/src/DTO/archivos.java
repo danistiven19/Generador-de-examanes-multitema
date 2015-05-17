@@ -7,6 +7,7 @@
 package DTO;
 
 import Control.latex;
+import DAO.rutaDAO;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -39,7 +40,7 @@ public class archivos {
         File arc = new File(url,arch);
         return(arc);
     }
-    
+    private rutaDAO url = new rutaDAO();
     public int crearBAT(String ruta, String nombre){
         File bat = new File("exec.bat");
         PrintWriter a=null;
@@ -50,11 +51,7 @@ public class archivos {
             Logger.getLogger(latex.class.getName()).log(Level.SEVERE, null, ex);
             return 0;
         }
-        String comando ="C: \n cd "+ruta+" \n  ";
-        a.print(comando);
-        comando = "pdflatex "+nombre+"\n";
-        a.print(comando);
-        comando = "exit";
+        String comando =url.getUnidad()+" \n cd "+ruta+" \n  pdflatex "+nombre+" \n exit";
         a.print(comando);
         a.close();
         return 1;
@@ -101,7 +98,7 @@ public class archivos {
                   }
                   if (!band){
                       if(!nom.equals("Opcion")){
-                        Process q1 = Runtime.getRuntime().exec("cmd /c start "+ruta+"\\"+nom+".pdf \n exit");
+                        Process q1 = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+ruta+" && start "+nom+".pdf \n exit");
                       }
                       //Todo se ejecutó perfectamente, entonces realizamos el registro en la base de datos
                       return 1;
