@@ -51,6 +51,13 @@ public class CtrlTema {
         tema.setCodigo(0);
         tema.setJornada("Mañana");
         temaDAO tdao = new temaDAO();
+        this.reiniciarExamen();
+        /*if(tdao.ingresarTema(tema) == 0){
+            if(this.reiniciarExamen() == 1){
+                this.reiniciarExamen();
+                tdao.ingresarTema(tema);
+            }
+        }*/
         tdao.ingresarTema(tema);
         lt.nuevoExamen(tema, "2014", "1");
     }
@@ -61,6 +68,17 @@ public class CtrlTema {
      
      public int randomPreguntas() throws SQLException{
          return rDAO.randompreguntas();
+     }
+     
+     public int reiniciarExamen(){
+         temaDAO temadao = new temaDAO();
+         preguntaTemaDAO ptdao = new preguntaTemaDAO();
+         if(ptdao.borrarPreguntaTemas() == 1){
+             temadao.borrarTemas();
+             return 1;
+         }else{
+             return 0;
+         }
      }
     
 }

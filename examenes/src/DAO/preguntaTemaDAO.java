@@ -155,6 +155,31 @@ public class preguntaTemaDAO {
         }
         return null;
     }
-    
-  
+
+    public int borrarPreguntaTemas() {
+        try {
+            if (con.isClosed()) {
+                con = bd.conexion();
+            }
+     
+            String consulta = "DELETE FROM pregunta_tema";
+            Statement sta = con.createStatement();
+            sta.executeUpdate(consulta);
+            consulta = "DELETE FROM pregunta_tema2";
+            sta = con.createStatement();
+            sta.executeUpdate(consulta);
+            return 1;
+        } catch (Exception ex) {
+            System.out.println("Problemas borrando preguntaTemas!. Error: " + ex);
+        } finally {
+            if (con != null) {
+                try {
+                    con.close();
+                } catch (SQLException ignore) {
+                }
+            }
+        }
+        return 0;
+    }
+
 }
