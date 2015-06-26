@@ -23,6 +23,11 @@ public class CtrlEnunciado {
     enunciadoDAO ed=new enunciadoDAO();
     preguntaDAO p1=new preguntaDAO(); 
     areaDAO area=new areaDAO();
+    
+    
+    public void eliminarEnunciado(int enunciadoEliminar){
+        ed.borrarEnunciado(enunciadoEliminar);
+    }
      public void cargarEnunciado(Enunciado en){
          ed.cargarEnunciado(en);
      }
