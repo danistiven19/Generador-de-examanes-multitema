@@ -82,8 +82,7 @@ public class credenciales extends javax.swing.JFrame {
             }
         });
 
-        btnVer.setText("Ver Credencial x Tema");
-        btnVer.setEnabled(false);
+        btnVer.setText("Ver Tema x Credencial");
         btnVer.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnVerActionPerformed(evt);
@@ -177,6 +176,7 @@ public class credenciales extends javax.swing.JFrame {
             Map.Entry map = (Map.Entry) it.next();
             String[] o = {map.getKey().toString(), map.getValue().toString()};
         }
+        System.out.println("Credencial-Tema guardado con existo");
     }//GEN-LAST:event_btnGuardarCredencialesActionPerformed
 
     private void btnVolverCredencialesActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVolverCredencialesActionPerformed
@@ -187,8 +187,8 @@ public class credenciales extends javax.swing.JFrame {
 
     private void btnVerActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnVerActionPerformed
         try {
-
-            Desktop.getDesktop().open(ctrlCredencial.writeExcelFile());
+        String nombreArchivo=JOptionPane.showInputDialog("Ingrese el nombre del archivo que contendrá la relacion Tema-Credencial");
+        Desktop.getDesktop().open(ctrlCredencial.writeExcelFile(nombreArchivo));
         } catch (Exception e) {
             JOptionPane.showMessageDialog(null, "Problemas al momento de crear el archivo credencial-Tema! Error: " + e);
         }
