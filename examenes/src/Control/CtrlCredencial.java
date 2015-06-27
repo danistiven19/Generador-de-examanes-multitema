@@ -116,12 +116,12 @@ public class CtrlCredencial {
         Iterator<String> it = credenciales.iterator();
         while (it.hasNext()) {
             String elemento = it.next();
-            System.out.println(elemento);
+           
         }
         
         return credenciales;
     }
-public File writeExcelFile() throws IOException{
+public File writeExcelFile(String nombreArchivo) throws IOException{
         ArrayList credencialTemaAr=new ArrayList();
         credencialTemaAr=ctDAO.getCredencialTema();
         Iterator itcredencialTema=credencialTemaAr.iterator();
@@ -131,7 +131,8 @@ public File writeExcelFile() throws IOException{
         int tema=0;
            
         /*La ruta donde se creará el archivo*/
-        String rutaArchivo = System.getProperty(fileNameWrite)+"/credencialTema.xls";
+      //  String rutaArchivo = System.getProperty(fileNameWrite)+"/credencialTema.xls";
+        String rutaArchivo = fileNameWrite+"/"+nombreArchivo+".xls";
         /*Se crea el objeto de tipo File con la ruta del archivo*/
         File archivoXLS = new File(rutaArchivo);
         /*Si el archivo existe se elimina*/
@@ -145,7 +146,7 @@ public File writeExcelFile() throws IOException{
         FileOutputStream archivo = new FileOutputStream(archivoXLS);
         
         /*Utilizamos la clase Sheet para crear una nueva hoja de trabajo dentro del libro que creamos anteriormente*/
-        Sheet hoja = libro.createSheet("Pregrado - 2013-02 CredencilesxTema");
+        Sheet hoja = libro.createSheet(nombreArchivo);
         int f=0;
         while(itcredencialTema.hasNext()){
         credencialTema=(Credencial_Tema) itcredencialTema.next();
@@ -164,10 +165,10 @@ public File writeExcelFile() throws IOException{
                 
                 /*Si la fila es la número 0, estableceremos los encabezados*/
                 if(f==0 && c==0){
-                    celda.setCellValue("Credencial");
-                }else if(f==0 && c==1){
                     celda.setCellValue("Tema");
-                }else if(f!=0 && c==0){
+                }else if(f==0 && c==1){
+                    celda.setCellValue("Credencial");
+                }else if(f!=0 && c==1){
                      /*Si no es la primera fila establecemos un valor*/
                      celda.setCellValue(credencial);
                 }else{
