@@ -264,7 +264,7 @@ rutaDAO url = new rutaDAO();
 
     }
 
-    public void nuevoTema(Tema tema, String año, String sem) throws IOException {
+    public void nuevoTema(Tema tema, String year, String sem) throws IOException {
         String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
@@ -370,7 +370,7 @@ rutaDAO url = new rutaDAO();
                 + "\\centerline {Examen de Admisi\\'on}"
                 + "\\newline"
                 + "\\newline"
-                + "\\centerline {" + año + " - " + sem + "}"
+                + "\\centerline {" + year + " - " + sem + "}"
                 + "\\author{Universidad de Antioquia}"
                 + "\\date{Jornada 1:  " + tema.getJornada() + "}"
                 + "\\end{minipage}"
@@ -386,7 +386,7 @@ rutaDAO url = new rutaDAO();
         this.crearExamen(2014, codInicial, body, codFinal, tema);
     }
 
-    public void nuevoExamen(Tema tema, String año, String sem) throws IOException {
+    public void nuevoExamen(Tema tema, String year, String sem) throws IOException {
         String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
@@ -502,7 +502,7 @@ rutaDAO url = new rutaDAO();
                 + "\\centerline {Examen de Admisi\\'on}"
                 + "\\newline"
                 + "\\newline"
-                + "\\centerline {" + año + " - " + sem + "}"
+                + "\\centerline {" + year + " - " + sem + "}"
                 + "\\author{Universidad de Antioquia}"
                 + "\\date{Jornada 1:  " + tema.getJornada() + "}"
                 + "\\end{minipage}"

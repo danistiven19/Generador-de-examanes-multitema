@@ -16,6 +16,7 @@ import java.util.Collection;
 import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -173,7 +174,10 @@ public class principal extends javax.swing.JFrame {
 
     private void btnGenerarMaestroActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGenerarMaestroActionPerformed
         try {
-            ctrlTema.crearMaestro();
+            String year=JOptionPane.showInputDialog("Ingrese el año para el cual va a crear el examen: ");
+            String semestre= JOptionPane.showInputDialog("Ingrese el semestre para el cual va a crear el examen (1 ó 2): ");
+            String jornada=JOptionPane.showInputDialog("Ingrese la joranada para la cual va a crear el examen: ");
+             ctrlTema.crearMaestro(year, semestre, jornada);
             actualizar();
         } catch (IOException ex1) {
             Logger.getLogger(principal.class.getName()).log(Level.SEVERE, null, ex1);

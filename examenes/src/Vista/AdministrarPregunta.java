@@ -145,6 +145,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         btn_guardarOpcion = new javax.swing.JButton();
         btn_cancelarPreguntas = new javax.swing.JButton();
         btn_GuardarPreguntas = new javax.swing.JButton();
+        lblInformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -157,6 +158,11 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         lbl_NumeroPregunta.setText(" ");
 
         cb_ListaPreguntas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        cb_ListaPreguntas.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                cb_ListaPreguntasActionPerformed(evt);
+            }
+        });
 
         jLabel6.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel6.setText("Orden:");
@@ -237,7 +243,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                         .addComponent(jLabel6)
                         .addGap(18, 18, 18)
                         .addComponent(cb_OrdenPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(0, 31, Short.MAX_VALUE))
                     .addComponent(jScrollPane1))
                 .addContainerGap())
         );
@@ -263,7 +269,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         });
 
         btn_guardarOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_guardarOpcion.setText("Agregar");
+        btn_guardarOpcion.setText("Agregar Opcion");
         btn_guardarOpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarOpcionActionPerformed(evt);
@@ -278,7 +284,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btn_guardarOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 95, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(btn_guardarOpcion)
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(cb_ListaOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -316,6 +322,8 @@ public class AdministrarPregunta extends javax.swing.JFrame {
             }
         });
 
+        lblInformacion.setText("    ");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -323,26 +331,32 @@ public class AdministrarPregunta extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btn_cancelarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_GuardarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jPanel4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(btn_cancelarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(layout.createSequentialGroup()
+                                .addGap(279, 279, 279)
+                                .addComponent(btn_GuardarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 126, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(lblInformacion, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_GuardarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_GuardarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_cancelarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(19, 19, 19))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(btn_cancelarPreguntas, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(lblInformacion)
+                .addGap(9, 9, 9))
         );
 
         pack();
@@ -371,7 +385,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_vaciarOpcionActionPerformed
 
     private void btn_GuardarPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarPreguntasActionPerformed
-
+        btn_guardarOpcion.setEnabled(true);
         if(txt_DescripcionPregunta.equals("")){
             JOptionPane.showMessageDialog(null, "Debe ingresar una descripción");
             txt_DescripcionPregunta.requestFocus();
@@ -403,11 +417,13 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
                     //Duplicar ls backSlashh!
                     if (ctrlPreg.crearPregunta(p) == 1) {
-                        JOptionPane.showMessageDialog(this, "Pregunta almacenada correctamente!");
+                        lblInformacion.setText( "Pregunta "+p.getCodigo()+ " almacenada correctamente!");
+                       // JOptionPane.showMessageDialog(this, "Pregunta almacenada correctamente!");
                     }
                 } else {
                     if (ctrlPreg.modificarPregunta(p) == 1) {
-                        JOptionPane.showMessageDialog(this, "Pregunta modificada correctamente!");
+                        lblInformacion.setText( "Pregunta "+p.getCodigo()+ " modificada correctamente!");
+                        //JOptionPane.showMessageDialog(this, "Pregunta modificada correctamente!");
                     }
                 }
 
@@ -487,6 +503,10 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         }
     }//GEN-LAST:event_btn_SeleccionarImagenActionPerformed
 
+    private void cb_ListaPreguntasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_ListaPreguntasActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_cb_ListaPreguntasActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -513,6 +533,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(AdministrarPregunta.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         //</editor-fold>
+        
 
         /* Create and display the form */
         java.awt.EventQueue.invokeLater(new Runnable() {
@@ -539,6 +560,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JLabel lblInformacion;
     private javax.swing.JLabel lbl_NumeroPregunta;
     private javax.swing.JTextArea txt_DescripcionPregunta;
     // End of variables declaration//GEN-END:variables

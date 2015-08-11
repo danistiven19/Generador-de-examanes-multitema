@@ -42,14 +42,14 @@ public class CtrlTema {
     public void desplegarRespuestas(Tema maestro){
         temaDAO.desplegarRespuestas(maestro);
     }
-     public void crearMaestro() throws IOException{
+     public void crearMaestro(String year, String semestre, String Jornada) throws IOException{
         Tema tema=new Tema();
            Calendar fecha = new GregorianCalendar();
         java.util.Date ju = fecha.getTime();
         java.sql.Date  date = new java.sql.Date(ju.getTime());
         tema.setFechaCreacion(date);
         tema.setCodigo(0);
-        tema.setJornada("Mañana");
+        tema.setJornada(Jornada);
         temaDAO tdao = new temaDAO();
         this.reiniciarExamen();
         /*if(tdao.ingresarTema(tema) == 0){
@@ -59,10 +59,10 @@ public class CtrlTema {
             }
         }*/
         tdao.ingresarTema(tema);
-        lt.nuevoExamen(tema, "2014", "1");
+        lt.nuevoExamen(tema, year, semestre);
     }
 
-     public void imprimir(Tema t) throws IOException{
+     public void imprimir(Tema t ) throws IOException{
          lt.nuevoTema(t, "2014", "2");
      }
      
