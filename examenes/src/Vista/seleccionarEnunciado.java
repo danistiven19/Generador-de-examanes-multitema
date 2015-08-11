@@ -2,6 +2,7 @@ package Vista;
 
 import Control.CtrlEnunciado;
 import Control.latex;
+import DAO.enunciadoDAO;
 import DTO.Enunciado;
 import java.io.IOException;
 import java.text.ParseException;
@@ -12,13 +13,13 @@ import java.util.logging.Logger;
 import javax.swing.ComboBoxModel;
 import javax.swing.DefaultComboBoxModel;
 import javax.swing.DefaultListModel;
+import javax.swing.JOptionPane;
 
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-
 /**
  *
  * @author julian.montoyap AdminEnunciado
@@ -28,23 +29,24 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
     /**
      * Creates new form administrarEnunciado
      */
-    ArrayList codigos ;
+    ArrayList codigos;
     private CtrlEnunciado ctrlEn = new CtrlEnunciado();
+
     public seleccionarEnunciado() {
         codigos = new ArrayList();
-        codigos= (ArrayList<Enunciado>) ctrlEn.listarCodigos();
+        codigos = (ArrayList<Enunciado>) ctrlEn.listarCodigos();
         initComponents();
-         if(codigos.size() == 0) {
+        if (codigos.size() == 0) {
             btn_Editar.setEnabled(false);
-        }else{
+        } else {
             DefaultComboBoxModel ls = (DefaultComboBoxModel) cb_Enunciados.getModel();
             Iterator i = codigos.iterator();
-            while(i.hasNext()){
+            while (i.hasNext()) {
                 ls.addElement(i.next().toString());
             }
             cb_Enunciados.setModel(ls);
             btn_Editar.setEnabled(true);
-         }
+        }
     }
 
     /**
@@ -61,6 +63,7 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
         btn_Cancelar = new javax.swing.JButton();
         btn_AddEnunciado = new javax.swing.JButton();
         btn_Editar = new javax.swing.JButton();
+        btn_Eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -93,6 +96,14 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
             }
         });
 
+        btn_Eliminar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_Eliminar.setText("Eliminar");
+        btn_Eliminar.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                btn_EliminarActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -105,10 +116,12 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(btn_AddEnunciado, javax.swing.GroupLayout.PREFERRED_SIZE, 91, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(btn_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Editar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(18, 18, 18)
+                        .addComponent(btn_Eliminar, javax.swing.GroupLayout.PREFERRED_SIZE, 90, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jLabel1)
                     .addComponent(btn_Cancelar))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addContainerGap(46, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -119,7 +132,8 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(cb_Enunciados, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(btn_Editar)
-                    .addComponent(btn_AddEnunciado))
+                    .addComponent(btn_AddEnunciado)
+                    .addComponent(btn_Eliminar))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 27, Short.MAX_VALUE)
                 .addComponent(btn_Cancelar)
                 .addGap(12, 12, 12))
@@ -138,7 +152,7 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
         DTO.Enunciado en = new DTO.Enunciado();
         Examenes ex = new Examenes();
         try {
-            ex.abrirEnunciado(en,2);
+            ex.abrirEnunciado(en, 2);
         } catch (ParseException ex1) {
             Logger.getLogger(seleccionarEnunciado.class.getName()).log(Level.SEVERE, null, ex1);
         }
@@ -148,16 +162,31 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
     private void btn_EditarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EditarActionPerformed
         DTO.Enunciado en = new DTO.Enunciado();
         en.setCodigo(Integer.parseInt((String) cb_Enunciados.getSelectedItem().toString()));
-              
+
         ctrlEn.cargarEnunciado(en);
         Examenes ex = new Examenes();
         try {
-            ex.abrirEnunciado(en,1);
+            ex.abrirEnunciado(en, 1);
         } catch (ParseException ex1) {
             Logger.getLogger(seleccionarEnunciado.class.getName()).log(Level.SEVERE, null, ex1);
         }
         this.hide();
     }//GEN-LAST:event_btn_EditarActionPerformed
+
+    private void btn_EliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarActionPerformed
+        // TODO add your handling code here:
+        Object item = cb_Enunciados.getSelectedItem();
+        int enunciadoAeliminar = Integer.parseInt(item.toString());
+        int confirmacion = JOptionPane.showConfirmDialog(null, "Se eliminara el enunciado con id " + enunciadoAeliminar + " ¿Desea realmente eliminar este enuciado?", "Advertencia", JOptionPane.YES_NO_OPTION);
+        if (confirmacion == JOptionPane.YES_OPTION) {
+            //enunciadoDAO enunciadoDao = new enunciadoDAO();
+            //enunciadoDao.borrarEnunciado(enunciadoAeliminar);
+            CtrlEnunciado obj = new CtrlEnunciado();
+            obj.eliminarEnunciado(enunciadoAeliminar);
+            cb_Enunciados.removeItem(item);
+            JOptionPane.showMessageDialog(this, "el enunciado con id " + enunciadoAeliminar + " ha sido eliminado exitosamente");
+        }
+    }//GEN-LAST:event_btn_EliminarActionPerformed
 
     /**
      * @param args the command line arguments
@@ -198,6 +227,7 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
     private javax.swing.JButton btn_AddEnunciado;
     private javax.swing.JButton btn_Cancelar;
     private javax.swing.JButton btn_Editar;
+    private javax.swing.JButton btn_Eliminar;
     private javax.swing.JComboBox cb_Enunciados;
     private javax.swing.JLabel jLabel1;
     // End of variables declaration//GEN-END:variables
