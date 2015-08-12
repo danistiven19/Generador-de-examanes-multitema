@@ -73,6 +73,7 @@ rutaDAO url = new rutaDAO();
             desc = en.getEnunciado();
         }
         codInicial = "\\documentclass[a4paper,12pt]{article}"
+                + "\\usepackage[utf8]{inputenc}"
                 + "\\usepackage[spanish]{babel}"
                 + "\\usepackage{times}"
                 + "\n" + paq
@@ -230,6 +231,7 @@ rutaDAO url = new rutaDAO();
          */
         //Definimos el codigo incial y final de LaTex
         codInicial = "\\documentclass[a4paper,12pt]{article}"
+                + "\\usepackage[utf8]{inputenc}"
                 + "\\usepackage[spanish]{babel}"
                 + "\\usepackage{times}"
                 + "\n"
@@ -609,6 +611,7 @@ rutaDAO url = new rutaDAO();
         //    adminArch.insertarTxt(arc,p.getDescripcionPregunta());
         //Definimos el codigo incial y final de LaTex
         codInicial = "\\documentclass[a4paper,12pt]{article}"
+                + "\\usepackage[utf8]{inputenc}"
                 + "\\usepackage[spanish]{babel}"
                 + "\\usepackage{times}"
                 + "\n"
