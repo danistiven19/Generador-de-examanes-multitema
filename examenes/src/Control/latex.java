@@ -358,7 +358,7 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{../../examenes/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{../../escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"
@@ -490,7 +490,7 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\title{ \n"
                 + "\\begin{minipage}{12cm} \n"
-                + "\\centerline {\\includegraphics{../../examenes/escudo.jpg}} \n"
+                + "\\centerline {\\includegraphics{../../escudo.jpg}} \n"
                 + "\\begin{center}"
                 + "Vicerector\\'ia de Docencia"
                 + "\\end{center}"
@@ -559,7 +559,7 @@ rutaDAO url = new rutaDAO();
 
             } catch (IOException ex) {
                 Logger.getLogger(latex.class.getName()).log(Level.SEVERE, null, ex);
-                //   Process q = Runtime.getRuntime().exec("cmd /c start"+"RD C:\\Users\\Daniel\\Desktop\\latex\\examen"+n);
+                //   Process q = Runtime.getRuntime().exec("cmd /c start"+"RD C:\\Users\\Daniel\\f\\latex\\examen"+n);
                 // n--;
             }
         } catch (IOException ex) {
