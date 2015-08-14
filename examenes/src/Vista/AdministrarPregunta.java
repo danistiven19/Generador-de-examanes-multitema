@@ -47,6 +47,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
    
     public AdministrarPregunta(DTO.Pregunta p, int sel) {
         initComponents();
+         setLocationRelativeTo(null);
         // archivos arch = new archivos();
         this.p = p;
         this.seleccion = sel;
@@ -148,6 +149,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         lblInformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pregunta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 

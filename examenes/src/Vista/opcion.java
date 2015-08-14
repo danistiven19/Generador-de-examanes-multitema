@@ -41,6 +41,7 @@ public class opcion extends javax.swing.JFrame {
    
     public opcion(DTO.Opcion p, int sel) {
         initComponents();
+         setLocationRelativeTo(null);
         archivos arch = new archivos();
         this.p = p;
         this.seleccion = sel;
@@ -111,6 +112,7 @@ public class opcion extends javax.swing.JFrame {
         lblInformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Opción");

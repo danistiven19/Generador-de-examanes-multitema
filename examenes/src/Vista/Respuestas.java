@@ -11,8 +11,10 @@ import Control.CtrlTema;
 //import DAO.temaDAO;
 import DTO.Pregunta_Tema;
 import DTO.Tema;
+import java.awt.Desktop;
 import java.util.Collection;
 import java.util.Iterator;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -27,13 +29,14 @@ public class Respuestas extends javax.swing.JFrame {
     Collection<Tema> temas;
     public Respuestas() {
         initComponents();
-         temas = ctrlTema.listarTemas();
-        cbTemas.removeAllItems();
-        Iterator it=temas.iterator();
+         setLocationRelativeTo(null);
+        temaMaestro = ctrlTema.cargarTema(0);
+        Iterator it = temaMaestro.getPreguntas().iterator();
         while(it.hasNext()){
-            Tema tt = (Tema) it.next();
-            cbTemas.addItem(tt.getCodigo());
+            Pregunta_Tema tt = (Pregunta_Tema) it.next();
+            cbPregunta.addItem(tt.getPregunta().getCodigo());
         }
+
     }
 
     /**
@@ -45,9 +48,6 @@ public class Respuestas extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabel1 = new javax.swing.JLabel();
-        cbTemas = new javax.swing.JComboBox();
-        btnCargar = new javax.swing.JButton();
         jLabel2 = new javax.swing.JLabel();
         cbPregunta = new javax.swing.JComboBox();
         cbOpcion = new javax.swing.JComboBox();
@@ -57,29 +57,17 @@ public class Respuestas extends javax.swing.JFrame {
         btnGuardar = new javax.swing.JButton();
         btnAgregar1 = new javax.swing.JButton();
         jLabel3 = new javax.swing.JLabel();
+        btnRespuestasDeTemas = new javax.swing.JButton();
+        jLabel4 = new javax.swing.JLabel();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
-
-        jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        jLabel1.setText("Seleccione un Tema:");
-
-        cbTemas.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-
-        btnCargar.setText("Cargar");
-        btnCargar.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btnCargarActionPerformed(evt);
-            }
-        });
+        setResizable(false);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setText("Pregunta:");
 
         cbPregunta.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        cbPregunta.setEnabled(false);
         cbPregunta.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbPreguntaActionPerformed(evt);
@@ -88,7 +76,6 @@ public class Respuestas extends javax.swing.JFrame {
 
         cbOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         cbOpcion.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "A", "B", "C", "D" }));
-        cbOpcion.setEnabled(false);
         cbOpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 cbOpcionActionPerformed(evt);
@@ -114,7 +101,6 @@ public class Respuestas extends javax.swing.JFrame {
         jScrollPane1.setViewportView(tbPregResp);
 
         btnAgregar.setText("Agregar Respuesta");
-        btnAgregar.setEnabled(false);
         btnAgregar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnAgregarActionPerformed(evt);
@@ -122,7 +108,6 @@ public class Respuestas extends javax.swing.JFrame {
         });
 
         btnGuardar.setText("Guardar Resuestas");
-        btnGuardar.setEnabled(false);
         btnGuardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btnGuardarActionPerformed(evt);
@@ -139,18 +124,15 @@ public class Respuestas extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Respuesta:");
 
-        jMenu1.setText("File");
-
-        jMenuItem1.setText("Ingresar Respuestas al maestro");
-        jMenuItem1.addActionListener(new java.awt.event.ActionListener() {
+        btnRespuestasDeTemas.setText("Ver respuestas de todos los temas");
+        btnRespuestasDeTemas.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jMenuItem1ActionPerformed(evt);
+                btnRespuestasDeTemasActionPerformed(evt);
             }
         });
-        jMenu1.add(jMenuItem1);
 
-        jMenuBar1.add(jMenu1);
-
+        jLabel4.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        jLabel4.setText("Ingrese las respuestas del examen maestro:");
         setJMenuBar(jMenuBar1);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -158,56 +140,56 @@ public class Respuestas extends javax.swing.JFrame {
         layout.setHorizontalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap(255, Short.MAX_VALUE)
-                        .addComponent(cbOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(btnAgregar))
+                        .addComponent(btnRespuestasDeTemas)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(btnGuardar))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel4, javax.swing.GroupLayout.PREFERRED_SIZE, 280, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                .addComponent(cbTemas, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.TRAILING))
                                 .addGap(18, 18, 18)
-                                .addComponent(btnCargar))
-                            .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(btnAgregar1)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(btnGuardar))
-                                .addGroup(layout.createSequentialGroup()
-                                    .addComponent(jLabel2)
-                                    .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                                    .addComponent(cbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, 52, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addGap(18, 18, 18)
-                                    .addComponent(jLabel3))
-                                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)))))
-                .addGap(43, 43, 43))
+                                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(cbOpcion, 0, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(cbPregunta, 0, 52, Short.MAX_VALUE))
+                                .addGap(18, 18, 18)
+                                .addComponent(btnAgregar))
+                            .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 391, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(btnAgregar1))))
+                .addContainerGap())
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(26, 26, 26)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
-                    .addComponent(cbTemas, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnCargar))
-                .addGap(45, 45, 45)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(cbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(cbOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btnAgregar)
-                    .addComponent(jLabel3))
+                .addContainerGap()
+                .addComponent(jLabel4)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(18, 18, 18)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jLabel2)
+                            .addComponent(cbPregunta, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jLabel3)
+                            .addComponent(cbOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                    .addGroup(layout.createSequentialGroup()
+                        .addGap(30, 30, 30)
+                        .addComponent(btnAgregar)))
                 .addGap(18, 18, 18)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 267, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btnAgregar1)
-                    .addComponent(btnGuardar))
+                    .addComponent(btnGuardar)
+                    .addComponent(btnRespuestasDeTemas))
+                .addGap(18, 18, 18)
+                .addComponent(btnAgregar1)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
@@ -223,11 +205,6 @@ public class Respuestas extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_cbOpcionActionPerformed
 
-    private void btnCargarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnCargarActionPerformed
-        Tema t= ctrlTema.cargarTema(Integer.parseInt(cbTemas.getSelectedItem().toString()));
-        actualizarTabla(t);
-    }//GEN-LAST:event_btnCargarActionPerformed
-
     private void btnAgregarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnAgregarActionPerformed
         DefaultTableModel dft = (DefaultTableModel) tbPregResp.getModel();
         String[] datos = {cbPregunta.getSelectedItem().toString(), cbOpcion.getSelectedItem().toString()};
@@ -235,21 +212,6 @@ public class Respuestas extends javax.swing.JFrame {
         tbPregResp.setModel(dft);
     }//GEN-LAST:event_btnAgregarActionPerformed
 Tema temaMaestro;
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-
-        cbPregunta.removeAllItems();
-        temaMaestro = ctrlTema.cargarTema(0);
-        Iterator it = temaMaestro.getPreguntas().iterator();
-        while(it.hasNext()){
-            Pregunta_Tema tt = (Pregunta_Tema) it.next();
-            cbPregunta.addItem(tt.getPregunta().getCodigo());
-        }
-        cbPregunta.setEnabled(true);
-        cbOpcion.setEnabled(true);
-        btnAgregar.setEnabled(true);
-        btnGuardar.setEnabled(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
-
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
         DefaultTableModel dft = (DefaultTableModel) tbPregResp.getModel();
         for(int i=0; i <dft.getRowCount(); i++){
@@ -286,6 +248,15 @@ Tema temaMaestro;
         exa.abrirPrincipal();
         this.hide();
     }//GEN-LAST:event_btnAgregar1ActionPerformed
+
+    private void btnRespuestasDeTemasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnRespuestasDeTemasActionPerformed
+      try {
+        String nombreArchivo=JOptionPane.showInputDialog("Ingrese el nombre del archivo que contendrá la relacion Tema-Respuestas");
+        Desktop.getDesktop().open(ctrlTema.writeExcelFile(nombreArchivo));
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(null, "Problemas al momento de crear el archivo Tema-Respuestas! Error: " + e);
+        }
+    }//GEN-LAST:event_btnRespuestasDeTemasActionPerformed
     
     private void actualizarTabla(Tema tt){
         if(tt.getPreguntas() != null){
@@ -355,17 +326,14 @@ Tema temaMaestro;
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton btnAgregar;
     private javax.swing.JButton btnAgregar1;
-    private javax.swing.JButton btnCargar;
     private javax.swing.JButton btnGuardar;
+    private javax.swing.JButton btnRespuestasDeTemas;
     private javax.swing.JComboBox cbOpcion;
     private javax.swing.JComboBox cbPregunta;
-    private javax.swing.JComboBox cbTemas;
-    private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
-    private javax.swing.JMenu jMenu1;
+    private javax.swing.JLabel jLabel4;
     private javax.swing.JMenuBar jMenuBar1;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable tbPregResp;
     // End of variables declaration//GEN-END:variables

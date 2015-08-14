@@ -28,6 +28,7 @@ public class credenciales extends javax.swing.JFrame {
      */
     public credenciales() {
         initComponents();
+         setLocationRelativeTo(null);
     }
     CtrlCredencial ctrlCredencial = new CtrlCredencial();
     CtrlRutas ctrlRutas = new CtrlRutas();
@@ -50,6 +51,7 @@ public class credenciales extends javax.swing.JFrame {
         btnVer = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setText("Credenciales");
 
@@ -190,7 +192,7 @@ public class credenciales extends javax.swing.JFrame {
         String nombreArchivo=JOptionPane.showInputDialog("Ingrese el nombre del archivo que contendrá la relacion Tema-Credencial");
         Desktop.getDesktop().open(ctrlCredencial.writeExcelFile(nombreArchivo));
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(null, "Problemas al momento de crear el archivo credencial-Tema! Error: " + e);
+            JOptionPane.showMessageDialog(null, "Problemas al momento de crear el archivo Tema-Credencial! Error: " + e);
         }
     }//GEN-LAST:event_btnVerActionPerformed
 

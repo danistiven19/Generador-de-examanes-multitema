@@ -33,9 +33,11 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
     private CtrlEnunciado ctrlEn = new CtrlEnunciado();
 
     public seleccionarEnunciado() {
+         
         codigos = new ArrayList();
         codigos = (ArrayList<Enunciado>) ctrlEn.listarCodigos();
         initComponents();
+        setLocationRelativeTo(null);
         if (codigos.size() == 0) {
             btn_Editar.setEnabled(false);
         } else {
@@ -66,6 +68,7 @@ public class seleccionarEnunciado extends javax.swing.JFrame {
         btn_Eliminar = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Enunciados");

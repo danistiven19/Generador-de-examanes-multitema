@@ -17,6 +17,7 @@ public class ProgressBar extends javax.swing.JFrame {
      */
     public ProgressBar() {
         initComponents();
+         setLocationRelativeTo(null);
     }
     
      //Método que llamaremos desde nuestro botón
@@ -68,6 +69,7 @@ public class ProgressBar extends javax.swing.JFrame {
         jButton1 = new javax.swing.JButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jButton1.setText("iniciar");
         jButton1.addActionListener(new java.awt.event.ActionListener() {

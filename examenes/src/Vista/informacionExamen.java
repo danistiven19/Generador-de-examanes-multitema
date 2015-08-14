@@ -24,6 +24,7 @@ public class informacionExamen extends javax.swing.JFrame {
      */
     public informacionExamen() {
         initComponents();
+         setLocationRelativeTo(null);
     }
 
     /**
@@ -46,6 +47,7 @@ public class informacionExamen extends javax.swing.JFrame {
         cb_jornada = new javax.swing.JComboBox();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         jLabel1.setText("Ingrese los datos correspondientes para el examen a crear:");
