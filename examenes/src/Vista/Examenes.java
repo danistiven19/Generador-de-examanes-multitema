@@ -6,11 +6,8 @@
 
 package Vista;
 
-import DTO.Tema;
-import Control.latex;
-import java.io.IOException;
 import java.text.ParseException;
-import javax.swing.JFrame;
+
 
 /**
  *
@@ -61,6 +58,9 @@ public class Examenes {
         Respuestas rta = new Respuestas();
         rta.show();
     }
-  
+    public void abrirInformacionExamen(){
+        informacionExamen inf=new informacionExamen();
+        inf.show();
+    }
     
 }

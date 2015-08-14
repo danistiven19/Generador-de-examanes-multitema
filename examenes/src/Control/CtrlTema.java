@@ -25,7 +25,36 @@ public class CtrlTema {
     private preguntaTemaDAO ptDAO = new preguntaTemaDAO();
     private temaDAO temaDAO = new temaDAO();
     private latex lt = new latex();
-     randomDAO rDAO = new randomDAO();
+    randomDAO rDAO = new randomDAO();
+    
+    private Integer year;
+    private Integer semestre;
+    private String jornada;
+
+    public Integer getYear() {
+        return year;
+    }
+
+    public void setYear(Integer year) {
+        this.year = year;
+    }
+
+    public Integer getSemestre() {
+        return semestre;
+    }
+
+    public void setSemestre(Integer semestre) {
+        this.semestre = semestre;
+    }
+
+    public String getJornada() {
+        return jornada;
+    }
+
+    public void setJornada(String jornada) {
+        this.jornada = jornada;
+    }
+    
     public Tema cargarTema(int t){   
         Tema tt = new Tema();
         tt.setCodigo(t);
@@ -42,7 +71,7 @@ public class CtrlTema {
     public void desplegarRespuestas(Tema maestro){
         temaDAO.desplegarRespuestas(maestro);
     }
-     public void crearMaestro(String year, String semestre, String Jornada) throws IOException{
+     public void crearMaestro(Integer year, Integer semestre, String Jornada) throws IOException{
         Tema tema=new Tema();
            Calendar fecha = new GregorianCalendar();
         java.util.Date ju = fecha.getTime();
@@ -59,11 +88,12 @@ public class CtrlTema {
             }
         }*/
         tdao.ingresarTema(tema);
-        lt.nuevoExamen(tema, year, semestre);
+        lt.nuevoExamen(tema, this.getYear(), this.getSemestre(), this.getJornada());
     }
 
      public void imprimir(Tema t ) throws IOException{
-         lt.nuevoTema(t, "2014", "2");
+         lt.nuevoTema(t, 2014, 1, "Mañana");
+        // lt.nuevoTema(t, this.getYear(), this.getSemestre(), this.getJornada());
      }
      
      public int randomPreguntas() throws SQLException{

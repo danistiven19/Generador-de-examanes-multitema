@@ -103,10 +103,10 @@ public class opcion extends javax.swing.JFrame {
         txt_DescripcionOpcion = new javax.swing.JTextArea();
         jLabel2 = new javax.swing.JLabel();
         cb_OrdenOpcion = new javax.swing.JComboBox();
-        btn_cancelarOpcion = new javax.swing.JButton();
+        btn_volver = new javax.swing.JButton();
         cb_DespuesDeOpcion = new javax.swing.JComboBox();
         jLabel3 = new javax.swing.JLabel();
-        btn_GuardarOpcion = new javax.swing.JButton();
+        btn_Guardar = new javax.swing.JButton();
         btn_SeleccionarImagen = new javax.swing.JButton();
         lblInformacion = new javax.swing.JLabel();
 
@@ -131,11 +131,11 @@ public class opcion extends javax.swing.JFrame {
             }
         });
 
-        btn_cancelarOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_cancelarOpcion.setText("Volver");
-        btn_cancelarOpcion.addActionListener(new java.awt.event.ActionListener() {
+        btn_volver.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_volver.setText("Volver");
+        btn_volver.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_cancelarOpcionActionPerformed(evt);
+                btn_volverActionPerformed(evt);
             }
         });
 
@@ -144,11 +144,11 @@ public class opcion extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setText("Despues de");
 
-        btn_GuardarOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
-        btn_GuardarOpcion.setText("Guardar");
-        btn_GuardarOpcion.addActionListener(new java.awt.event.ActionListener() {
+        btn_Guardar.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
+        btn_Guardar.setText("Guardar");
+        btn_Guardar.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                btn_GuardarOpcionActionPerformed(evt);
+                btn_GuardarActionPerformed(evt);
             }
         });
 
@@ -174,9 +174,9 @@ public class opcion extends javax.swing.JFrame {
                         .addGap(0, 0, Short.MAX_VALUE)
                         .addComponent(btn_SeleccionarImagen))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
-                        .addComponent(btn_cancelarOpcion)
+                        .addComponent(btn_volver)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(btn_GuardarOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(btn_Guardar, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
@@ -214,8 +214,8 @@ public class opcion extends javax.swing.JFrame {
                     .addComponent(cb_DespuesDeOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(btn_cancelarOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(btn_GuardarOpcion))
+                    .addComponent(btn_volver, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(btn_Guardar))
                 .addGap(18, 18, 18)
                 .addComponent(lblInformacion)
                 .addGap(0, 18, Short.MAX_VALUE))
@@ -224,7 +224,7 @@ public class opcion extends javax.swing.JFrame {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void btn_cancelarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_cancelarOpcionActionPerformed
+    private void btn_volverActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_volverActionPerformed
         
         //preguntaDAO pd = new preguntaDAO();
         
@@ -236,10 +236,15 @@ public class opcion extends javax.swing.JFrame {
         ex.abrirPregunta(preg, 1);
         this.hide();
 
-    }//GEN-LAST:event_btn_cancelarOpcionActionPerformed
+    }//GEN-LAST:event_btn_volverActionPerformed
 
-    private void btn_GuardarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarOpcionActionPerformed
-        
+    private void btn_GuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_GuardarActionPerformed
+       Pregunta preg=new Pregunta();
+       preg=p.getPregunta();
+      
+       
+          
+       
         if(txt_DescripcionOpcion.equals("")){
             JOptionPane.showMessageDialog(null, "Debe ingresar la descripción");
             txt_DescripcionOpcion.requestFocus();
@@ -274,8 +279,9 @@ public class opcion extends javax.swing.JFrame {
                 Examenes exa = new Examenes();
                 if (seleccion == 2) {
                     if (ctrlop.crearOpcion(p) == 1) {
-                    //Duplicar ls backSlashh!
+                         //Duplicar ls backSlashh!
                             lblInformacion.setText("Opcion "+ p.getCodigo()+" almacenada correctamente!");
+                           
                             //JOptionPane.showMessageDialog(this, "Opcion almacenada correctamente!");
                             exa.abrirPregunta(p.getPregunta(), 1);
                             this.hide();
@@ -296,7 +302,7 @@ public class opcion extends javax.swing.JFrame {
             Logger.getLogger(administrarEnunciado.class.getName()).log(Level.SEVERE, null, ex);
         }        // TODO add your handling code here:
 
-    }//GEN-LAST:event_btn_GuardarOpcionActionPerformed
+    }//GEN-LAST:event_btn_GuardarActionPerformed
 
     private void cb_OrdenOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_cb_OrdenOpcionActionPerformed
         // TODO add your handling code here:
@@ -353,9 +359,9 @@ public class opcion extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btn_GuardarOpcion;
+    private javax.swing.JButton btn_Guardar;
     private javax.swing.JButton btn_SeleccionarImagen;
-    private javax.swing.JButton btn_cancelarOpcion;
+    private javax.swing.JButton btn_volver;
     private javax.swing.JComboBox cb_DespuesDeOpcion;
     private javax.swing.JComboBox cb_OrdenOpcion;
     private javax.swing.JLabel jLabel1;
