@@ -8,20 +8,24 @@ package Control;
 
 import DAO.preguntaTemaDAO;
 import DAO.randomDAO;
+import DAO.rutaDAO;
 import DAO.temaDAO;
 import DTO.Pregunta_Tema;
 import DTO.Tema;
+import java.io.File;
 import java.io.IOException;
 import java.sql.SQLException;
 import java.util.Calendar;
 import java.util.Collection;
 import java.util.GregorianCalendar;
+import java.util.Iterator;
 
 /**
  *
  * @author Daniel
  */
 public class CtrlTema {
+    rutaDAO url = new rutaDAO();
     private preguntaTemaDAO ptDAO = new preguntaTemaDAO();
     private temaDAO temaDAO = new temaDAO();
     private latex lt = new latex();
@@ -70,10 +74,21 @@ public class CtrlTema {
          return rDAO.randompreguntas();
      }
      
-     public int reiniciarExamen(){
+     public int reiniciarExamen() throws IOException{
          temaDAO temadao = new temaDAO();
          preguntaTemaDAO ptdao = new preguntaTemaDAO();
          if(ptdao.borrarPreguntaTemas() == 1){
+             Collection<Tema> temas = listarTemas();
+             Iterator it = temas.iterator();
+             while(it.hasNext()){
+                 Tema tema = (Tema) it.next();
+                 String ruta = url.getRuta() + "\\examen" + tema.getCodigo();
+                 File f = new File(ruta);
+                 if(f.exists()){
+                     Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+url.getRuta()+" && start /b /wait \n RD /S /Q examen" + tema.getCodigo() + " \n exit");
+                 }
+             }
+             
              temadao.borrarTemas();
              return 1;
          }else{

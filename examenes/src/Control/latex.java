@@ -72,10 +72,10 @@ rutaDAO url = new rutaDAO();
         if (en.getEnunciado() != null) {
             desc = en.getEnunciado();
         }
-        codInicial = "\\documentclass[a4paper,12pt]{article}"
+        codInicial = "\\documentclass[a4paper,10pt]{article}"
                 + "\\usepackage[utf8]{inputenc}"
                 + "\\usepackage[spanish]{babel}"
-                + "\\usepackage{times}"
+                + "\\usepackage{arial}"
                 + "\n" + paq
                 + "\n"
                 + "\\title{Vista preliminar de Enunciado}"
@@ -93,7 +93,6 @@ rutaDAO url = new rutaDAO();
         //Creamos el archivo .Tex con el codigo creado anteriormente en la ruta especificada
         String nom = "Enunciado";
         String ext = ".tex";
-        System.out.println(ruta);
         File archivo = new File(ruta, nom + ext);
         PrintWriter a = null;
         try {
@@ -127,87 +126,15 @@ rutaDAO url = new rutaDAO();
                 return 1;
 
             } else {
-                Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + ruta + " \n exit");
-                /* int k=Integer.parseInt(en.getCodigo());
-                 k--;
-                 n=Integer.toString(k);*/
+                Process q1 = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+url.getRuta()+" && start /b /wait \n RD /S /Q " + nombre + " \n exit");
                 return (0);
             }
         } catch (IOException ex) {
-            Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + ruta + " \n exit");
-            /* int k=Integer.parseInt(n);
-             k--;
-             n= Integer.toString(k);*/
+                Process q1 = Runtime.getRuntime().exec("cmd /c "+url.getUnidad()+" && cd "+url.getRuta()+" && start /b /wait \n RD /S /Q " + nombre + " \n exit");
             return (0);
         }
     }
 
-    public void borrarEnunciado(Enunciado en) throws IOException {
-        enunciadoDAO enDAO = new enunciadoDAO();
-        enDAO.cargarEnunciado(en);
-        Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + en.getUrl() + " \n exit");
-        if (enDAO.borrarEnunciado(en.getCodigo()) == 1) {
-            return;
-        }
-    }
-
-    /*
-     public int crearOpcion(Opcion op) throws IOException, InterruptedException{
-     //Para crear un enunciado, primero obtiene la ruta donde se está almacenando la información LaTeX
-     rutaDAO url = new rutaDAO();
-     //Creamos la carpeta que contendrá toda la información del enunciado a  crear
-     String nombre = "Opcion"+op.getCodigo();
-     //             String ruta = pAux.getUrl()+"\\"+nombre;
-     String ruta = url.getRuta()+"\\"+nombre;
-     Process p1 = Runtime.getRuntime().exec("cmd /c "+"md "+ruta+"\\"+nombre);
-     op.setUrl(url.getRutaSQL()+"\\\\"+nombre);
-     Pregunta pAux= new Pregunta();
-     pAux.setCodigo( op.getPregunta());
-     preguntaDAO pdao=new preguntaDAO();
-     pdao.cargarPregunta(pAux);
-           
-           
-            
-     Thread.sleep(500);
-        
-    
-     //Definimos el codigo incial y final de LaTex
-     codInicial="\\documentclass[a4paper,12pt]{article}"+
-     "\\usepackage[spanish]{babel}"+
-     "\\usepackage{times}"+
-     "\n"+
-     "\\title{Vista preliminar de Enunciado}"+
-     "\n"+
-     "\\usepackage{graphicx}"+
-     "\n"+
-     "\\begin{document}"+
-     "\\twocolumn \n"+  
-     "\n" +
-     "\\maketitle"+
-     "\n";
-     codFinal=   "\\end{document}";
-     //Unimos todas las partes para crear el documento completo de LaTeX para el enunciado
-     String codigo = codInicial+"\n"+op.getDescripcionOpcion()+"\n \\newline \n"+codFinal;
-     //Creamos el archivo .Tex con el codigo creado anteriormente en la ruta especificada
-     String nom="Opcion";
-     String ext=".tex";
-     File archivo = new File(ruta,nom+ext);
-     PrintWriter a = null;
-     try {
-     a = new PrintWriter(archivo);
-
-     } catch (IOException ex) {
-     Logger.getLogger(latex.class.getName()).log(Level.SEVERE, null, ex);
-     }
-     a.println(codigo);
-     a.close();
-     //Creamos el archivo .BAT para compilar LaTeX
-     adminArch.crearBAT(ruta, nom+ext);
-     return adminArch.ejecutarBAT(ruta,nom);
-                    
-           
-     }
-     */
     public int crearOpcion(Opcion op) throws IOException, InterruptedException {
         //Para crear un enunciado, primero obtiene la ruta donde se está almacenando la información LaTeX
         rutaDAO url = new rutaDAO();
@@ -230,12 +157,12 @@ rutaDAO url = new rutaDAO();
          adminArch.insertarTxt(arc,op.getDescripcionOpcion());
          */
         //Definimos el codigo incial y final de LaTex
-        codInicial = "\\documentclass[a4paper,12pt]{article}"
+        codInicial = "\\documentclass[a4paper,10pt]{article}"
                 + "\\usepackage[utf8]{inputenc}"
                 + "\\usepackage[spanish]{babel}"
-                + "\\usepackage{times}"
+                + "\\usepackage{arial}"
                 + "\n"
-                + "\\title{Vista preliminar de Enunciado}"
+                + "\\title{Vista preliminar de opción}"
                 + "\n"
                 + "\\usepackage{graphicx}"
                 + "\n"
@@ -349,11 +276,11 @@ rutaDAO url = new rutaDAO();
 
         cont++;
 
-        codInicial = "\\documentclass[a4paper,12pt]{article}\n"
-                + "\\usepackage[left=1cm,top=3cm,right=1cm,bottom=3cm]{geometry} \n"
+        codInicial = "\\documentclass[a4paper,10pt]{article}\n"
+                + "\\usepackage[left=1.5cm,top=1cm,right=1.5cm,bottom=1cm]{geometry} \n"
                 + "\\usepackage[utf8]{inputenc} \n"
                 + "\\usepackage[spanish]{babel}\n"
-                + "\\usepackage{times}\n"
+                + "\\usepackage{arial}\n"
                 + "\\usepackage{graphicx}\n"
                 + paquetes
                 + "\n"
@@ -381,7 +308,8 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\maketitle\n"
                 + "\\twocolumn \n"
-                + "\\newpage \n";
+                + "\\newpage \n"
+                + "\\noindent \n";
 
         codFinal = "\\end{document}";
 
@@ -392,7 +320,6 @@ rutaDAO url = new rutaDAO();
         String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
-           // Process q = Runtime.getRuntime().exec("cmd /c cd "+rutaCom+" && start examen.pdf");
               Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + rutaCom + " \n exit");
             //return;
         }
@@ -481,11 +408,11 @@ rutaDAO url = new rutaDAO();
             }
         }
 
-        codInicial = "\\documentclass[a4paper,12pt]{article}\n"
+        codInicial = "\\documentclass[a4paper,10pt]{article}\n"
                 + "\\usepackage[utf8]{inputenc} \n"
-                + "\\usepackage[left=1cm,top=3cm,right=1cm,bottom=3cm]{geometry} \n"
+                + "\\usepackage[left=1.5cm,top=1cm,right=1.5cm,bottom=1cm]{geometry} \n"
                 + "\\usepackage[spanish]{babel}\n"
-                + "\\usepackage{times}\n"
+                + "\\usepackage{arial}\n"
                 + "\\usepackage{graphicx}\n"
                 + paquetes
                 + "\n"
@@ -513,7 +440,8 @@ rutaDAO url = new rutaDAO();
                 + "\n"
                 + "\\maketitle\n"
                 + "\\twocolumn \n"
-                + "\\newpage ";
+                + "\\newpage \n"
+                + "\\noindent \n";
 
         codFinal = "\\end{document}";
 
@@ -574,8 +502,10 @@ rutaDAO url = new rutaDAO();
 
     public int borrarPregunta(Pregunta p) throws IOException {
         preguntaDAO pDAO = new preguntaDAO();
-        pDAO.cargarInformacionPregunta(p);
-        Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + p.getUrl() + " \n exit");
+        p = pDAO.cargarInformacionPregunta(p);
+        String comando = "cmd /c "+url.getUnidad()+" && cd "+url.getRuta()+"\\Enunciado"+p.getEnunciado().getCodigo()+" && start /b /wait \n RD /S /Q Pregunta" + p.getCodigo() + " \n exit";
+        Process q1 = Runtime.getRuntime().exec(comando);
+        //Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + p.getUrl() + " \n exit");
         if (pDAO.borrarPregunta(p.getCodigo()) == 1) {
             return 1;
         }
@@ -584,8 +514,12 @@ rutaDAO url = new rutaDAO();
 
     public void vaciarOpcion(Opcion p) throws IOException {
         opcionesDAO pDAO = new opcionesDAO();
-       // pDAO.cargarOpcion(p);
-        Process q1 = Runtime.getRuntime().exec("cmd /c start /b /wait \n RD /S /Q " + p.getUrl() + " \n exit");
+        preguntaDAO pregDAO = new preguntaDAO();
+        p = pDAO.cargarOpcion(p);
+        p.setPregunta(pregDAO.cargarInformacionPregunta(p.getPregunta()));
+        String comando = "cmd /c "+url.getUnidad()+" && cd "+p.getPregunta().getUrl()+
+                " &&  start /b /wait \n RD /S /Q Opcion" + p.getCodigo()+ " \n exit";
+        Process q1 = Runtime.getRuntime().exec(comando);
         if (pDAO.vaciarOpcion(p.getCodigo()) == 1) {
             return;
         }
@@ -610,12 +544,12 @@ rutaDAO url = new rutaDAO();
         //   File arc = adminArch.crearTxt(ruta,"Pregunta.txt");
         //    adminArch.insertarTxt(arc,p.getDescripcionPregunta());
         //Definimos el codigo incial y final de LaTex
-        codInicial = "\\documentclass[a4paper,12pt]{article}"
+        codInicial = "\\documentclass[a4paper,10pt]{article}"
                 + "\\usepackage[utf8]{inputenc}"
                 + "\\usepackage[spanish]{babel}"
-                + "\\usepackage{times}"
+                + "\\usepackage{arial}"
                 + "\n"
-                + "\\title{Vista preliminar de Enunciado}"
+                + "\\title{Vista preliminar de Pregunta}"
                 + "\n"
                 + "\\usepackage{graphicx}"
                 + "\n"
