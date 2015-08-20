@@ -110,6 +110,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                 }
                 ls2.addElement(cod1);
                 btn_editarOpcion.setEnabled(true);
+                btn_vaciarOpcion.setEnabled(true);
                 
             }
             cb_ListaOpciones.setModel(ls2);
@@ -377,6 +378,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     private void btn_vaciarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_vaciarOpcionActionPerformed
         Opcion p = new Opcion();
         p.setCodigo((Integer.parseInt(cb_ListaOpciones.getSelectedItem().toString())));
+        p.setPregunta(this.p);
         latex lt = new latex();
         try {
             lt.vaciarOpcion(p);
