@@ -7,8 +7,8 @@ import java.util.logging.Logger;
 public class BD {
 static String bd = "examenBD"; 
 static String login = "root"; 
-static String password = ""; 
-static String url  ="jdbc:mysql://localhost/examenBD?user=" + login + "&password=" + password; 
+static String password = "root"; 
+static String url  ="jdbc:mysql://localhost/examenbd?user=" + login + "&password=" + password; 
 static String Driver ="com.mysql.jdbc.Driver";
 Connection conn = null; 
 Connection conex;

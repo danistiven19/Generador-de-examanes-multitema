@@ -11,7 +11,7 @@ package DAO;
  */
 public class rutaDAO {
     //C:\Users\julianesten\Documents\NetBeansProjects\Generador-de-examanes-multitema\examenes
-    private String rutaBase = "C:/Users/Luisa/Desktop/Generador-de-examanes-multitema/examenes";
+    private String rutaBase = "D:/UDEA/UdeA 8/Proyecto Integrador II/Generador-de-examanes-multitema/examenes";
 
     public String getRutaBase() {
         return rutaBase;
@@ -20,8 +20,8 @@ public class rutaDAO {
     public void setRutaBase(String rutaBase) {
         this.rutaBase = rutaBase;
     }
-    private String raiz = "C:\\Users\\Luisa\\Desktop\\Generador-de-examanes-multitema\\examenes";
-    private String raizSQL = "C:\\Users\\Luisa\\Desktop\\Generador-de-examanes-multitema\\examenes";
+    private String raiz = "D:\\UDEA\\UdeA 8\\Proyecto Integrador II\\Generador-de-examanes-multitema\\examenes";
+    private String raizSQL = "D:\\\\UDEA\\\\UdeA 8\\\\Proyecto Integrador II\\\\Generador-de-examanes-multitema\\\\examenes";
     private String ruta = raiz + "\\Pruebas";
     private String rutaSQL = raizSQL + "\\\\Pruebas";
     
