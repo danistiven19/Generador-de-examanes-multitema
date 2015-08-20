@@ -193,7 +193,7 @@ rutaDAO url = new rutaDAO();
 
     }
 
-    public void nuevoTema(Tema tema, String year, String sem) throws IOException {
+    public void nuevoTema(Tema tema, Integer year, Integer sem, String jornada) throws IOException {
         String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
@@ -301,7 +301,7 @@ rutaDAO url = new rutaDAO();
                 + "\\newline"
                 + "\\centerline {" + year + " - " + sem + "}"
                 + "\\author{Universidad de Antioquia}"
-                + "\\date{Jornada 1:  " + tema.getJornada() + "}"
+                + "\\date{Jornada 1:  " + jornada + "}"
                 + "\\end{minipage}"
                 + "}"
                 + "\\begin{document}\n"
@@ -313,10 +313,10 @@ rutaDAO url = new rutaDAO();
 
         codFinal = "\\end{document}";
 
-        this.crearExamen(2014, codInicial, body, codFinal, tema);
+        this.crearExamen(year, codInicial, body, codFinal, tema);
     }
 
-    public void nuevoExamen(Tema tema, String year, String sem) throws IOException {
+    public void nuevoExamen(Tema tema, Integer year, Integer sem, String jornada) throws IOException {
         String rutaCom = url.getRaiz()+"\\Pruebas\\examen" + tema.getCodigo();
         File folder = new File(rutaCom);
         if (folder.exists()) {
@@ -433,7 +433,7 @@ rutaDAO url = new rutaDAO();
                 + "\\newline"
                 + "\\centerline {" + year + " - " + sem + "}"
                 + "\\author{Universidad de Antioquia}"
-                + "\\date{Jornada 1:  " + tema.getJornada() + "}"
+                + "\\date{Jornada 1:  " + jornada + "}"
                 + "\\end{minipage}"
                 + "}"
                 + "\\begin{document}\n"
@@ -445,7 +445,7 @@ rutaDAO url = new rutaDAO();
 
         codFinal = "\\end{document}";
 
-        this.crearExamen(2014, codInicial, body, codFinal, tema);
+        this.crearExamen(year, codInicial, body, codFinal, tema);
     }
 
     public void crearExamen(int n, String inicio, String preguntas, String fin, Tema tema) {

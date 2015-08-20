@@ -53,6 +53,7 @@ public class administrarEnunciado extends javax.swing.JFrame {
 
     public administrarEnunciado(DTO.Enunciado en1, int seleccion) throws ParseException {
         initComponents();
+         setLocationRelativeTo(null);
         this.en1 = en1;
         Date now = new Date(System.currentTimeMillis());
         this.seleccion = seleccion;
@@ -200,6 +201,7 @@ actualizarPreg();
         lblInformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jLabel1.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel1.setText("Codigo:");

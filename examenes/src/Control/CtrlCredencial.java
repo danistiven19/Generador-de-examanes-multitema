@@ -146,13 +146,12 @@ public File writeExcelFile(String nombreArchivo) throws IOException{
         FileOutputStream archivo = new FileOutputStream(archivoXLS);
         
         /*Utilizamos la clase Sheet para crear una nueva hoja de trabajo dentro del libro que creamos anteriormente*/
-        Sheet hoja = libro.createSheet(nombreArchivo);
+        Sheet hoja = libro.createSheet("TemaXcredencial"+nombreArchivo);
         int f=0;
+        
+        
         while(itcredencialTema.hasNext()){
-        credencialTema=(Credencial_Tema) itcredencialTema.next();
-        credencial=credencialTema.getCredencial();
-        temaT=credencialTema.getTema();
-        tema=temaT.getCodigo();
+      
            
         /*Hacemos un ciclo para inicializar los valores de 10 filas de celdas*/
            
@@ -178,6 +177,10 @@ public File writeExcelFile(String nombreArchivo) throws IOException{
             }
        
         f=f+1;
+        credencialTema=(Credencial_Tema) itcredencialTema.next();
+        credencial=credencialTema.getCredencial();
+        temaT=credencialTema.getTema();
+        tema=temaT.getCodigo();
             
         }
         

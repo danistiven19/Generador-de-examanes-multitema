@@ -44,9 +44,10 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     private int maxOpcion;
     private CtrlEnunciado ctrlEn = new CtrlEnunciado();
     private CtrlOpcion ctrlop = new CtrlOpcion();
-
+   
     public AdministrarPregunta(DTO.Pregunta p, int sel) {
         initComponents();
+         setLocationRelativeTo(null);
         // archivos arch = new archivos();
         this.p = p;
         this.seleccion = sel;
@@ -149,6 +150,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         lblInformacion = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel3.setBorder(javax.swing.BorderFactory.createTitledBorder(null, "Pregunta", javax.swing.border.TitledBorder.DEFAULT_JUSTIFICATION, javax.swing.border.TitledBorder.DEFAULT_POSITION, new java.awt.Font("Tahoma", 0, 14))); // NOI18N
 
@@ -285,15 +287,15 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(jPanel4Layout.createSequentialGroup()
-                        .addComponent(btn_guardarOpcion)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                    .addGroup(jPanel4Layout.createSequentialGroup()
                         .addComponent(cb_ListaOpciones, javax.swing.GroupLayout.PREFERRED_SIZE, 284, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 63, Short.MAX_VALUE)
                         .addComponent(btn_editarOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(26, 26, 26)
                         .addComponent(btn_vaciarOpcion, javax.swing.GroupLayout.PREFERRED_SIZE, 73, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(161, 161, 161))))
+                        .addGap(161, 161, 161))
+                    .addGroup(jPanel4Layout.createSequentialGroup()
+                        .addComponent(btn_guardarOpcion)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -438,6 +440,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     }//GEN-LAST:event_btn_GuardarPreguntasActionPerformed
 
     private void btn_guardarOpcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_guardarOpcionActionPerformed
+       
         if (p.getOpciones() != null) {
             if (p.getOpciones().size() == 4) {
                 JOptionPane.showMessageDialog(null, "Una pregunta solo puede tener cuatro opciones!");
@@ -450,6 +453,8 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         Pregunta preg = new Pregunta();
         preg.setCodigo(p.getCodigo());
         op.setPregunta(preg);
+        opciones.add(op);
+        preg.setOpciones(opciones);
         ex.abrirOpcion(op, 2);
         this.hide();
 

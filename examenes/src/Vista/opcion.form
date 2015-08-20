@@ -3,6 +3,7 @@
 <Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JFrameFormInfo">
   <Properties>
     <Property name="defaultCloseOperation" type="int" value="3"/>
+    <Property name="resizable" type="boolean" value="false"/>
   </Properties>
   <SyntheticProperties>
     <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
@@ -32,9 +33,9 @@
                       <Component id="btn_SeleccionarImagen" min="-2" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" alignment="1" attributes="0">
-                      <Component id="btn_cancelarOpcion" min="-2" max="-2" attributes="0"/>
+                      <Component id="btn_volver" min="-2" max="-2" attributes="0"/>
                       <EmptySpace max="32767" attributes="0"/>
-                      <Component id="btn_GuardarOpcion" min="-2" pref="106" max="-2" attributes="0"/>
+                      <Component id="btn_Guardar" min="-2" pref="106" max="-2" attributes="0"/>
                   </Group>
                   <Group type="102" attributes="0">
                       <Group type="103" groupAlignment="0" attributes="0">
@@ -85,8 +86,8 @@
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Group type="103" groupAlignment="3" attributes="0">
-                  <Component id="btn_cancelarOpcion" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
-                  <Component id="btn_GuardarOpcion" alignment="3" min="-2" max="-2" attributes="0"/>
+                  <Component id="btn_volver" alignment="3" min="-2" pref="26" max="-2" attributes="0"/>
+                  <Component id="btn_Guardar" alignment="3" min="-2" max="-2" attributes="0"/>
               </Group>
               <EmptySpace type="separate" max="-2" attributes="0"/>
               <Component id="lblInformacion" min="-2" max="-2" attributes="0"/>
@@ -147,7 +148,7 @@
         <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="cb_OrdenOpcionActionPerformed"/>
       </Events>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_cancelarOpcion">
+    <Component class="javax.swing.JButton" name="btn_volver">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -155,7 +156,7 @@
         <Property name="text" type="java.lang.String" value="Volver"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_cancelarOpcionActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_volverActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JComboBox" name="cb_DespuesDeOpcion">
@@ -176,7 +177,7 @@
         <Property name="text" type="java.lang.String" value="Despues de"/>
       </Properties>
     </Component>
-    <Component class="javax.swing.JButton" name="btn_GuardarOpcion">
+    <Component class="javax.swing.JButton" name="btn_Guardar">
       <Properties>
         <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
           <Font name="Tahoma" size="14" style="0"/>
@@ -184,7 +185,7 @@
         <Property name="text" type="java.lang.String" value="Guardar"/>
       </Properties>
       <Events>
-        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_GuardarOpcionActionPerformed"/>
+        <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="btn_GuardarActionPerformed"/>
       </Events>
     </Component>
     <Component class="javax.swing.JButton" name="btn_SeleccionarImagen">

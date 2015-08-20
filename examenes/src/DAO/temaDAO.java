@@ -1,11 +1,10 @@
 package DAO;
 
-import Control.Combinatoria;
+
 import DTO.Pregunta;
 import DTO.Pregunta_Tema;
 import DTO.Tema;
 import DTO.combinacion;
-import com.mysql.jdbc.exceptions.MySQLIntegrityConstraintViolationException;
 import java.sql.Connection;
 import java.sql.Date;
 import java.sql.ResultSet;
@@ -24,6 +23,7 @@ import javax.swing.JOptionPane;
  * @author luisa.suarezz
  */
 public class temaDAO {
+    
 
     //ingresarTema
     private BD bd;
