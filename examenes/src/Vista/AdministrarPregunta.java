@@ -44,7 +44,6 @@ public class AdministrarPregunta extends javax.swing.JFrame {
     private int maxOpcion;
     private CtrlEnunciado ctrlEn = new CtrlEnunciado();
     private CtrlOpcion ctrlop = new CtrlOpcion();
-   
     public AdministrarPregunta(DTO.Pregunta p, int sel) {
         initComponents();
          setLocationRelativeTo(null);
@@ -118,8 +117,10 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         } else {
             this.p.setCodigo(ctrlEn.obtenerUltimoCodigoOpcionPregunta(p));
         }
+        if(cb_ListaOpciones.getSelectedIndex()!=-1){//si hay opciones es porque se va a editar
+            btn_guardarOpcion.setEnabled(true);
+        }  
     }
-
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -273,6 +274,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
 
         btn_guardarOpcion.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         btn_guardarOpcion.setText("Agregar Opcion");
+        btn_guardarOpcion.setEnabled(false);
         btn_guardarOpcion.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 btn_guardarOpcionActionPerformed(evt);
@@ -422,6 +424,7 @@ public class AdministrarPregunta extends javax.swing.JFrame {
                     //Duplicar ls backSlashh!
                     if (ctrlPreg.crearPregunta(p) == 1) {
                         lblInformacion.setText( "Pregunta "+p.getCodigo()+ " almacenada correctamente!");
+                        btn_guardarOpcion.setEnabled(true);
                        // JOptionPane.showMessageDialog(this, "Pregunta almacenada correctamente!");
                     }
                 } else {
