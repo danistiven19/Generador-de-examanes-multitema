@@ -486,7 +486,8 @@ actualizarPreg();
 
     private void btn_EliminarPreguntaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btn_EliminarPreguntaActionPerformed
         Pregunta preg = new Pregunta();
-        preg.setCodigo((Integer.parseInt(cb_ListaPreguntas.getSelectedItem().toString())));
+        int posicion =Integer.parseInt(cb_ListaPreguntas.getSelectedItem().toString());
+        preg.setCodigo((int) this.pregunta.get(posicion - 1));
         latex lt = new latex();
         try {
             if (lt.borrarPregunta(preg) == 1) {

@@ -86,7 +86,11 @@ public class AdministrarPregunta extends javax.swing.JFrame {
         if (sel == 1) {
 
             cb_OrdenPreguntas.setSelectedIndex(p.getOrden() - 1);
-            cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta().getCodigo() - 1);
+            if(p.getDespuesDePregunta().getCodigo() == 0){
+                cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta().getCodigo());
+            }else{
+                cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta().getCodigo() - 1);
+            }
             //cb_ListaPreguntas.setSelectedIndex(p.getDespuesDePregunta() -1);
             lbl_NumeroPregunta.setText(Integer.toString(p.getCodigo()));
 //            cb_EsObligatoria.setSelectedItem(p.getObligatorioa());
